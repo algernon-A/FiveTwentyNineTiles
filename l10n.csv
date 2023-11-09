@@ -1,0 +1,7 @@
+key	en-US
+Options.SECTION[algernon.529Tiles]	529 Tiles
+Options.OPTION[ModSettings.UnlockAll]	Unlock all tiles
+Options.OPTION_DESCRIPTION[ModSettings.UnlockAll]	If this is selected then all tiles on the map will automatically be unlocked when you load into a city.
+Options.OPTION[ModSettings.ResetModSettings]	Reset to default
+Options.OPTION_DESCRIPTION[ModSettings.ResetModSettings]	Resets all 529 Tiles mod settings to default.
+Options.WARNING[ModSettings.ResetModSettings]	Reset all 529 Tiles settings to default?  This cannot be undone.
