@@ -17,7 +17,7 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Game logger reference.
         /// </summary>
-        private static readonly ILog GameLogger = LogManager.GetLogger("529 Tiles");
+        private static readonly ILog GameLogger = LogManager.GetLogger(Mod.ModName);
 
         /// <summary>
         /// Logs a debugging message.
@@ -39,6 +39,12 @@ namespace FiveTwentyNineTiles
         public static void LogError(params object[] messages) => LogMessage(Level.Error, null, messages);
 
         /// <summary>
+        /// Logs a critical error message.
+        /// </summary>
+        /// <param name="messages">Message to log (individual strings will be concatenated).</param>
+        public static void LogCritical(params object[] messages) => LogMessage(Level.Critical, null, messages);
+
+        /// <summary>
         /// Logs an exception message.
         /// </summary>
         /// <param name="e">Exception to log.</param>
@@ -55,6 +61,15 @@ namespace FiveTwentyNineTiles
         {
             // Build message.
             StringBuilder logMessage = new ();
+
+            // Prefix mod name for errors and exceptions, as they are displayed on screen and having the mod name at the start helps identify the error.
+            if (logLevel > Level.Info)
+            {
+                logMessage.Append(Mod.ModName);
+                logMessage.Append(": ");
+            }
+
+            // Append individual message components.
             for (int i = 0; i < messages.Length; ++i)
             {
                 // Append "null" in place of any null values.

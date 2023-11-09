@@ -15,6 +15,11 @@ namespace FiveTwentyNineTiles
     public sealed class Mod : IMod
     {
         /// <summary>
+        /// The mod's default name.
+        /// </summary>
+        public const string ModName = "529 Tiles";
+
+        /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
         public void OnLoad()
@@ -22,10 +27,7 @@ namespace FiveTwentyNineTiles
             Logging.LogInfo("loading");
 
             // Apply harmony patches.
-            Logging.LogInfo("applying Harmony patches");
-            Harmony harmonyInstance = new ("algernon-529Tiles");
-            harmonyInstance.PatchAll();
-            Logging.LogInfo("patching complete");
+            new Patcher("algernon-529Tiles");
         }
 
         /// <summary>
@@ -35,8 +37,18 @@ namespace FiveTwentyNineTiles
         public void OnCreateWorld(UpdateSystem updateSystem)
         {
             Logging.LogInfo("starting OnCreateWorld");
+
+            // Don't do anything if Harmony patches weren't applied.
+            if (!Patcher.PatchesApplied)
+            {
+                Logging.LogCritical("Harmony patches not applied; aborting system activation");
+                return;
+            }
+
+            // Load translations.
             Localization.LoadTranslations();
 
+            // Activate systems.
             updateSystem.UpdateAfter<FiveTwentyNineSystem>(SystemUpdatePhase.Deserialize);
             updateSystem.UpdateAfter<PostDeserialize<FiveTwentyNineSystem>>(SystemUpdatePhase.Deserialize);
             updateSystem.UpdateAt<SettingsSystem>(SystemUpdatePhase.UIUpdate);
@@ -48,6 +60,9 @@ namespace FiveTwentyNineTiles
         public void OnDispose()
         {
             Logging.LogInfo("disposing");
+
+            // Revert harmony patches.
+            Patcher.Instance?.UnPatchAll();
         }
     }
 }
