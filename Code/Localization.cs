@@ -36,7 +36,7 @@ namespace FiveTwentyNineTiles
                     ExecutableAsset modAsset = AssetDatabase.global.GetAsset(SearchFilter<ExecutableAsset>.ByCondition(x => x.definition?.FullName == assemblyName));
                     if (modAsset is null)
                     {
-                        Logging.Error("mod executable asset not found");
+                        Log.Error("mod executable asset not found");
                         return null;
                     }
 
@@ -81,14 +81,14 @@ namespace FiveTwentyNineTiles
                         }
                         catch (Exception e)
                         {
-                            Logging.Exception(e, "exception reading localization for locale ", localeID);
+                            Log.Exception(e, "exception reading localization for locale ", localeID);
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                Logging.Exception(e, "exception reading localization file");
+                Log.Exception(e, "exception reading localization file");
             }
         }
     }

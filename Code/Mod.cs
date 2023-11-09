@@ -7,7 +7,6 @@ namespace FiveTwentyNineTiles
     using Game;
     using Game.Modding;
     using Game.Serialization;
-    using HarmonyLib;
 
     /// <summary>
     /// The base mod class for instantiation by the game.
@@ -24,7 +23,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public void OnLoad()
         {
-            Logging.Info("loading");
+            Log.Info("loading");
 
             // Apply harmony patches.
             new Patcher("algernon-529Tiles");
@@ -36,12 +35,12 @@ namespace FiveTwentyNineTiles
         /// <param name="updateSystem">Game update system.</param>
         public void OnCreateWorld(UpdateSystem updateSystem)
         {
-            Logging.Info("starting OnCreateWorld");
+            Log.Info("starting OnCreateWorld");
 
             // Don't do anything if Harmony patches weren't applied.
             if (!Patcher.PatchesApplied)
             {
-                Logging.Critical("Harmony patches not applied; aborting system activation");
+                Log.Critical("Harmony patches not applied; aborting system activation");
                 return;
             }
 
@@ -59,7 +58,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public void OnDispose()
         {
-            Logging.Info("disposing");
+            Log.Info("disposing");
 
             // Revert harmony patches.
             Patcher.Instance?.UnPatchAll();

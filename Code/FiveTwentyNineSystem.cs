@@ -50,7 +50,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         protected override void OnCreate()
         {
-            Logging.Debug("529.OnCreate");
+            Log.Debug("529.OnCreate");
             base.OnCreate();
 
             // Initialize queries.

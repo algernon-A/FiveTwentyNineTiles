@@ -24,7 +24,7 @@ namespace FiveTwentyNineTiles
             // Dispose of any existing instance.
             if (Instance != null)
             {
-                Logging.Error("existing Patcher instance detected with ID ", Instance._harmonyID, "; reverting");
+                Log.Error("existing Patcher instance detected with ID ", Instance._harmonyID, "; reverting");
                 Instance.UnPatchAll();
             }
 
@@ -53,7 +53,7 @@ namespace FiveTwentyNineTiles
         {
             if (!string.IsNullOrEmpty(_harmonyID))
             {
-                Logging.Info("reverting all applied patches for ", _harmonyID);
+                Log.Info("reverting all applied patches for ", _harmonyID);
                 Harmony harmonyInstance = new (_harmonyID);
 
                 try
@@ -65,7 +65,7 @@ namespace FiveTwentyNineTiles
                 }
                 catch (Exception e)
                 {
-                    Logging.Exception(e, "exception reverting patches for ", _harmonyID);
+                    Log.Exception(e, "exception reverting patches for ", _harmonyID);
                 }
             }
         }
@@ -76,20 +76,20 @@ namespace FiveTwentyNineTiles
         /// </summary>
         private void PatchAnnotations()
         {
-            Logging.Info("applying annotated Harmony patches for ", _harmonyID);
+            Log.Info("applying annotated Harmony patches for ", _harmonyID);
             Harmony harmonyInstance = new (_harmonyID);
 
             try
             {
                 harmonyInstance.PatchAll();
-                Logging.Info("patching complete");
+                Log.Info("patching complete");
 
                 // Set applied flag.
                 PatchesApplied = true;
             }
             catch (Exception e)
             {
-                Logging.Exception(e, "exception applying annotated Harmony patches; reverting");
+                Log.Exception(e, "exception applying annotated Harmony patches; reverting");
                 harmonyInstance.UnpatchAll(_harmonyID);
             }
         }

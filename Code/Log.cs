@@ -1,4 +1,4 @@
-﻿// <copyright file="Logging.cs" company="algernon (K. Algernon A. Sheppard)">
+﻿// <copyright file="Log.cs" company="algernon (K. Algernon A. Sheppard)">
 // Copyright (c) algernon (K. Algernon A. Sheppard). All rights reserved.
 // </copyright>
 
@@ -12,7 +12,7 @@ namespace FiveTwentyNineTiles
     /// <summary>
     /// Logging utility class.
     /// </summary>
-    public static class Logging
+    public static class Log
     {
         /// <summary>
         /// Game logger reference.

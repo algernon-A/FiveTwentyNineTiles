@@ -26,7 +26,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         protected override void OnCreate()
         {
-            Logging.Debug("ModSettings OnCreate");
+            Log.Debug("ModSettings OnCreate");
             base.OnCreate();
 
             // Load saved settings.
@@ -54,7 +54,7 @@ namespace FiveTwentyNineTiles
             }
             else
             {
-                Logging.Error("unable to access game options UI system");
+                Log.Error("unable to access game options UI system");
             }
         }
     }
