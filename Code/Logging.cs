@@ -24,32 +24,32 @@ namespace FiveTwentyNineTiles
         /// </summary>
         /// <param name="messages">Message to log (individual strings will be concatenated).</param>
         [Conditional("DEBUG")]
-        public static void LogDebug(params object[] messages) => LogMessage(Level.Debug, null, messages);
+        public static void Debug(params object[] messages) => LogMessage(Level.Debug, null, messages);
 
         /// <summary>
         /// Logs an informational message.
         /// </summary>
         /// <param name="messages">Message to log (individual strings will be concatenated).</param>
-        public static void LogInfo(params object[] messages) => LogMessage(Level.Info, null, messages);
+        public static void Info(params object[] messages) => LogMessage(Level.Info, null, messages);
 
         /// <summary>
         /// Logs an error message.
         /// </summary>
         /// <param name="messages">Message to log (individual strings will be concatenated).</param>
-        public static void LogError(params object[] messages) => LogMessage(Level.Error, null, messages);
+        public static void Error(params object[] messages) => LogMessage(Level.Error, null, messages);
 
         /// <summary>
         /// Logs a critical error message.
         /// </summary>
         /// <param name="messages">Message to log (individual strings will be concatenated).</param>
-        public static void LogCritical(params object[] messages) => LogMessage(Level.Critical, null, messages);
+        public static void Critical(params object[] messages) => LogMessage(Level.Critical, null, messages);
 
         /// <summary>
         /// Logs an exception message.
         /// </summary>
         /// <param name="e">Exception to log.</param>
         /// <param name="messages">Message to log (individual strings will be concatenated).</param>
-        public static void LogException(Exception e, params object[] messages) => LogMessage(Level.Error, e, messages);
+        public static void Exception(Exception e, params object[] messages) => LogMessage(Level.Error, e, messages);
 
         /// <summary>
         /// Logs a message.

@@ -28,7 +28,7 @@ namespace FiveTwentyNineTiles
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> UpdateStatusTranspiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
         {
-            Logging.LogInfo("transpiling ", original.DeclaringType, '.', original.Name);
+            Logging.Info("transpiling ", original.DeclaringType, '.', original.Name);
 
             // Parse instructions.
             IEnumerator<CodeInstruction> instructionEnumerator = instructions.GetEnumerator();
@@ -39,7 +39,7 @@ namespace FiveTwentyNineTiles
                 // Look for ldloc.s 5 followed by add (only instance in target).
                 if (instruction.opcode == OpCodes.Ldloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 5)
                 {
-                    Logging.LogDebug("found ldloc.s 5");
+                    Logging.Debug("found ldloc.s 5");
                     yield return instruction;
 
                     // Check for following add.
@@ -47,7 +47,7 @@ namespace FiveTwentyNineTiles
                     instruction = instructionEnumerator.Current;
                     if (instruction.opcode == OpCodes.Add)
                     {
-                        Logging.LogDebug("found add");
+                        Logging.Debug("found add");
                         yield return instruction;
 
                         // Insert call to math.min(x, 441).

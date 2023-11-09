@@ -24,7 +24,7 @@ namespace FiveTwentyNineTiles
             // Dispose of any existing instance.
             if (Instance != null)
             {
-                Logging.LogError("existing Patcher instance detected with ID ", Instance._harmonyID, "; reverting");
+                Logging.Error("existing Patcher instance detected with ID ", Instance._harmonyID, "; reverting");
                 Instance.UnPatchAll();
             }
 
@@ -53,7 +53,7 @@ namespace FiveTwentyNineTiles
         {
             if (!string.IsNullOrEmpty(_harmonyID))
             {
-                Logging.LogInfo("reverting all applied patches for ", _harmonyID);
+                Logging.Info("reverting all applied patches for ", _harmonyID);
                 Harmony harmonyInstance = new (_harmonyID);
 
                 try
@@ -65,7 +65,7 @@ namespace FiveTwentyNineTiles
                 }
                 catch (Exception e)
                 {
-                    Logging.LogException(e, "exception reverting patches for ", _harmonyID);
+                    Logging.Exception(e, "exception reverting patches for ", _harmonyID);
                 }
             }
         }
@@ -76,20 +76,20 @@ namespace FiveTwentyNineTiles
         /// </summary>
         private void PatchAnnotations()
         {
-            Logging.LogInfo("applying annotated Harmony patches for ", _harmonyID);
+            Logging.Info("applying annotated Harmony patches for ", _harmonyID);
             Harmony harmonyInstance = new (_harmonyID);
 
             try
             {
                 harmonyInstance.PatchAll();
-                Logging.LogInfo("patching complete");
+                Logging.Info("patching complete");
 
                 // Set applied flag.
                 PatchesApplied = true;
             }
             catch (Exception e)
             {
-                Logging.LogException(e, "exception applying annotated Harmony patches; reverting");
+                Logging.Exception(e, "exception applying annotated Harmony patches; reverting");
                 harmonyInstance.UnpatchAll(_harmonyID);
             }
         }

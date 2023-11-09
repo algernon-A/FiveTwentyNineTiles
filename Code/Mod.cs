@@ -24,7 +24,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public void OnLoad()
         {
-            Logging.LogInfo("loading");
+            Logging.Info("loading");
 
             // Apply harmony patches.
             new Patcher("algernon-529Tiles");
@@ -36,12 +36,12 @@ namespace FiveTwentyNineTiles
         /// <param name="updateSystem">Game update system.</param>
         public void OnCreateWorld(UpdateSystem updateSystem)
         {
-            Logging.LogInfo("starting OnCreateWorld");
+            Logging.Info("starting OnCreateWorld");
 
             // Don't do anything if Harmony patches weren't applied.
             if (!Patcher.PatchesApplied)
             {
-                Logging.LogCritical("Harmony patches not applied; aborting system activation");
+                Logging.Critical("Harmony patches not applied; aborting system activation");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public void OnDispose()
         {
-            Logging.LogInfo("disposing");
+            Logging.Info("disposing");
 
             // Revert harmony patches.
             Patcher.Instance?.UnPatchAll();
