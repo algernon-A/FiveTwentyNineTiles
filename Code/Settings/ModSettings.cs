@@ -50,7 +50,7 @@ namespace FiveTwentyNineTiles
         public bool Contra { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the mod's setttings should be reset.
+        /// Gets or sets a value indicating whether the mod's settings should be reset.
         /// </summary>
         [XmlIgnore]
         [SettingsUIButton(confirm = true)]
