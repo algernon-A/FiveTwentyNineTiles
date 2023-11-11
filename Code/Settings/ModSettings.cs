@@ -6,28 +6,30 @@ namespace FiveTwentyNineTiles
 {
     using System.Xml.Serialization;
     using Colossal.IO.AssetDatabase;
+    using Game.Modding;
     using Game.Settings;
 
     /// <summary>
     /// The mod's settings.
     /// </summary>
-    [FileLocation("529 Tiles")]
-    public class ModSettings : Setting
+    [FileLocation(Mod.ModName)]
+    public class ModSettings : ModSetting
     {
         private bool _unlockAll = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModSettings"/> class.
         /// </summary>
-        public ModSettings()
+        /// <param name="mod"><see cref="IMod"/> instance.</param>
+        public ModSettings(IMod mod)
+            : base(mod)
         {
-            // Set initial defaults.
-            SetDefaults();
         }
 
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
         /// </summary>
+        [SettingsUISection("UnlockAll")]
         public bool UnlockAll
         {
             get => _unlockAll;
@@ -53,7 +55,9 @@ namespace FiveTwentyNineTiles
         /// Gets or sets a value indicating whether the mod's settings should be reset.
         /// </summary>
         [XmlIgnore]
-        [SettingsUIButton(confirm = true)]
+        [SettingsUIButton]
+        [SettingsUISection("ResetModSettings")]
+        [SettingsUIConfirmation("ResetConfirmation")]
         public bool ResetModSettings
         {
             // Dummy getter.

@@ -39,7 +39,7 @@ namespace FiveTwentyNineTiles
         public void PostDeserialize(Context context)
         {
             // Unlock all tiles.
-            if (SettingsSystem.ActiveSettings.UnlockAll)
+            if (Mod.ActiveSettings.UnlockAll)
             {
                 EntityManager.RemoveComponent<Native>(_mapTileQuery.ToEntityArray(Allocator.Temp));
             }

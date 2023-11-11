@@ -11,6 +11,7 @@ namespace FiveTwentyNineTiles
     using System.Reflection;
     using Colossal.IO.AssetDatabase;
     using Colossal.Localization;
+    using Game.Modding;
     using Game.SceneFlow;
 
     /// <summary>
@@ -89,6 +90,81 @@ namespace FiveTwentyNineTiles
             catch (Exception e)
             {
                 Log.Exception(e, "exception reading localization file");
+            }
+        }
+
+        /// <summary>
+        /// Loads settings translations from tab-separated l10n file.
+        /// </summary>
+        /// <param name="settings">Settings file to use.</param>
+        public static void LoadTranslations(ModSetting settings)
+        {
+            try
+            {
+                Log.Debug("attempting to load translations");
+
+                string translationFile = Path.Combine(AssemblyPath, "l10n.csv");
+                if (File.Exists(translationFile))
+                {
+                    Log.Debug("parsing translation file ", translationFile);
+
+                    // Parse file.
+                    IEnumerable<string[]> fileLines = File.ReadAllLines(translationFile).Select(x => x.Split('\t'));
+
+                    // Iterate through each game locale.
+                    foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
+                    {
+                        try
+                        {
+                            // Find matching column in file.
+                            int valueColumn = Array.IndexOf(fileLines.First(), localeID);
+
+                            // Make sure a valid column has been found (column 0 is the context and column 1 is the translation key).
+                            if (valueColumn > 1)
+                            {
+                                Log.Debug("found translation for ", localeID);
+
+                                // Add translations to game locales.
+                                MemorySource language = new (fileLines.Skip(1).ToDictionary(x => GenerateOptionsKey(x[0], x[1], settings), x => x.ElementAtOrDefault(valueColumn)));
+                                GameManager.instance.localizationManager.AddSource(localeID, language);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Exception(e, "exception reading localization for locale ", localeID);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e, "exception reading settings localization file");
+            }
+        }
+
+        /// <summary>
+        /// Generates a settings option localization key.
+        /// </summary>
+        /// <param name="context">Key context.</param>
+        /// <param name="key">Key.</param>
+        /// <param name="settings">Settings instance.</param>
+        /// <returns>Full option localization key.</returns>
+        private static string GenerateOptionsKey(string context, string key, ModSetting settings)
+        {
+            switch (context)
+            {
+                default:
+                case "Options.SECTION":
+                    return settings.GetSettingsLocaleID();
+
+                case "Options.OPTION":
+                    return settings.GetOptionLabelLocaleID(key);
+
+                case "Options.OPTION_DESCRIPTION":
+                    return settings.GetOptionDescLocaleID(key);
+
+                case "Options.WARNING":
+                    return "Options.WARNING[" + key + "]";
             }
         }
     }

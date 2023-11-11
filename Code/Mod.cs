@@ -4,6 +4,7 @@
 
 namespace FiveTwentyNineTiles
 {
+    using Colossal.IO.AssetDatabase;
     using Game;
     using Game.Modding;
     using Game.Serialization;
@@ -19,6 +20,11 @@ namespace FiveTwentyNineTiles
         public const string ModName = "529 Tiles";
 
         /// <summary>
+        /// Gets the mod's active settings configuration.
+        /// </summary>
+        internal static ModSettings ActiveSettings { get; private set; }
+
+        /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
         public void OnLoad()
@@ -27,6 +33,16 @@ namespace FiveTwentyNineTiles
 
             // Apply harmony patches.
             new Patcher("algernon-529Tiles");
+
+            // Register mod settings to game options UI.
+            ActiveSettings = new (this);
+            ActiveSettings.RegisterInOptionsUI();
+
+            // Load translations.
+            Localization.LoadTranslations(ActiveSettings);
+
+            // Load saved settings.
+            AssetDatabase.global.LoadSettings("529TileSettings", ActiveSettings, new ModSettings(this));
         }
 
         /// <summary>
@@ -44,13 +60,9 @@ namespace FiveTwentyNineTiles
                 return;
             }
 
-            // Load translations.
-            Localization.LoadTranslations();
-
             // Activate systems.
             updateSystem.UpdateAfter<FiveTwentyNineSystem>(SystemUpdatePhase.Deserialize);
             updateSystem.UpdateAfter<PostDeserialize<FiveTwentyNineSystem>>(SystemUpdatePhase.Deserialize);
-            updateSystem.UpdateAt<SettingsSystem>(SystemUpdatePhase.UIUpdate);
         }
 
         /// <summary>
