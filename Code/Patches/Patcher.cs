@@ -5,12 +5,13 @@
 namespace FiveTwentyNineTiles
 {
     using System;
+    using Colossal.Logging;
     using HarmonyLib;
 
     /// <summary>
     /// A basic Harmony patching class.
     /// </summary>
-    internal class Patcher
+    public class Patcher
     {
         private readonly string _harmonyID;
 
@@ -19,12 +20,16 @@ namespace FiveTwentyNineTiles
         /// Doing so applies all annotated patches.
         /// </summary>
         /// <param name="harmonyID">Harmony ID to use.</param>
-        internal Patcher(string harmonyID)
+        /// <param name="log">Log to use for performing patching.</param>
+        public Patcher(string harmonyID, ILog log)
         {
+            // Set log reference.
+            Log = log;
+
             // Dispose of any existing instance.
             if (Instance != null)
             {
-                Log.Error("existing Patcher instance detected with ID ", Instance._harmonyID, "; reverting");
+                log.Error("existing Patcher instance detected with ID " + Instance._harmonyID + "; reverting");
                 Instance.UnPatchAll();
             }
 
@@ -39,21 +44,26 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Gets the active instance.
         /// </summary>
-        internal static Patcher Instance { get; private set; }
+        public static Patcher Instance { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether patches were successfully applied.
         /// </summary>
-        internal static bool PatchesApplied { get; private set; } = false;
+        public bool PatchesApplied { get; private set; } = false;
+
+        /// <summary>
+        /// Gets the logger to use when patching.
+        /// </summary>
+        public ILog Log { get; private set; }
 
         /// <summary>
         /// Reverts all applied patches.
         /// </summary>
-        internal void UnPatchAll()
+        public void UnPatchAll()
         {
             if (!string.IsNullOrEmpty(_harmonyID))
             {
-                Log.Info("reverting all applied patches for ", _harmonyID);
+                Log.Info("reverting all applied patches for " + _harmonyID);
                 Harmony harmonyInstance = new (_harmonyID);
 
                 try
@@ -65,7 +75,7 @@ namespace FiveTwentyNineTiles
                 }
                 catch (Exception e)
                 {
-                    Log.Exception(e, "exception reverting patches for ", _harmonyID);
+                    Log.Critical(e, "exception reverting all applied patches for " + _harmonyID);
                 }
             }
         }
@@ -76,7 +86,7 @@ namespace FiveTwentyNineTiles
         /// </summary>
         private void PatchAnnotations()
         {
-            Log.Info("applying annotated Harmony patches for ", _harmonyID);
+            Log.Info("applying annotated Harmony patches for " + _harmonyID);
             Harmony harmonyInstance = new (_harmonyID);
 
             try
@@ -89,7 +99,7 @@ namespace FiveTwentyNineTiles
             }
             catch (Exception e)
             {
-                Log.Exception(e, "exception applying annotated Harmony patches; reverting");
+                Log.Critical(e, "exception applying annotated Harmony patches; reverting");
                 harmonyInstance.UnpatchAll(_harmonyID);
             }
         }

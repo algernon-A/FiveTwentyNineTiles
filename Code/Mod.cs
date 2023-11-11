@@ -5,6 +5,7 @@
 namespace FiveTwentyNineTiles
 {
     using Colossal.IO.AssetDatabase;
+    using Colossal.Logging;
     using Game;
     using Game.Modding;
     using Game.Serialization;
@@ -20,6 +21,11 @@ namespace FiveTwentyNineTiles
         public const string ModName = "529 Tiles";
 
         /// <summary>
+        /// Gets the mod's active log.
+        /// </summary>
+        internal static ILog Log { get; private set; }
+
+        /// <summary>
         /// Gets the mod's active settings configuration.
         /// </summary>
         internal static ModSettings ActiveSettings { get; private set; }
@@ -29,17 +35,19 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public void OnLoad()
         {
+            // Initialize logger.
+            Log = LogManager.GetLogger(ModName);
             Log.Info("loading");
 
             // Apply harmony patches.
-            new Patcher("algernon-529Tiles");
+            new Patcher("algernon-529Tiles", Log);
 
             // Register mod settings to game options UI.
             ActiveSettings = new (this);
             ActiveSettings.RegisterInOptionsUI();
 
             // Load translations.
-            Localization.LoadTranslations(ActiveSettings);
+            Localization.LoadTranslations(ActiveSettings, Log);
 
             // Load saved settings.
             AssetDatabase.global.LoadSettings("529TileSettings", ActiveSettings, new ModSettings(this));
@@ -54,7 +62,7 @@ namespace FiveTwentyNineTiles
             Log.Info("starting OnCreateWorld");
 
             // Don't do anything if Harmony patches weren't applied.
-            if (!Patcher.PatchesApplied)
+            if (Patcher.Instance is null || !Patcher.Instance.PatchesApplied)
             {
                 Log.Critical("Harmony patches not applied; aborting system activation");
                 return;
