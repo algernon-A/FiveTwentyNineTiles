@@ -7,21 +7,21 @@
 		<Copyright>Copyright © 2023 algernon</Copyright>
 		<Product>$(Title)</Product>
 		<Version>0.2</Version>
-		<TargetFramework>net472</TargetFramework>
 		<LangVersion>9.0</LangVersion>
-		<ManagedDLLPath>$(MSBuildProgramFiles32)/Steam/steamapps/common/Cities Skylines II/Cities2_Data/Managed</ManagedDLLPath>
-		<AssemblySearchPaths>
-			$(AssemblySearchPaths);
-			$(ManagedDLLPath);
-		</AssemblySearchPaths>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Remove="stylecop.json" />
-	</ItemGroup>
+
+	<Import Project="Config/Postbuild.csproj" />
+	<Import Project="Config/Targets.csproj" />
+	<Import Project="Config/References.csproj" />
+
 	<ItemGroup>
 		<AdditionalFiles Include="stylecop.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="Config/PostBuild.csproj" />
+	  <None Include="Config/References.csproj" />
+	  <None Include="Config/Targets.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
@@ -31,31 +31,8 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Reference Include="Game" />
-		<Reference Include="Cinemachine" />
-		<Reference Include="Colossal.AssetPipeline" />
-		<Reference Include="Colossal.Collections" />
-		<Reference Include="Colossal.Core" />
-		<Reference Include="Colossal.IO" />
-		<Reference Include="Colossal.IO.AssetDatabase" />
-		<Reference Include="Colossal.Localization" />
-		<Reference Include="Colossal.Logging" />
-		<Reference Include="Colossal.Mathematics" />
-		<Reference Include="Colossal.Mono.Cecil" />
-		<Reference Include="Colossal.UI.Binding" />
-		<Reference Include="Unity.Burst" />
-		<Reference Include="Unity.Collections" />
-		<Reference Include="Unity.Entities" />
-		<Reference Include="Unity.Mathematics" />
-		<Reference Include="UnityEngine" />
-		<Reference Include="UnityEngine.CoreModule" />
+	  <None Update="l10n.csv">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
-	<Target Name="DeployToModDirectory" AfterTargets="Build">
-		<PropertyGroup>
-			<DeployDir>$(USERPROFILE)/AppData/LocalLow/Colossal Order/Cities Skylines II/Mods/WorkInProgress/$(SolutionName)</DeployDir>
-		</PropertyGroup>
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
-		<Copy SourceFiles="$(TargetDir)/0Harmony.dll" DestinationFolder="$(DeployDir)" />
-		<Copy SourceFiles="$(ProjectDir)/l10n.csv" DestinationFolder="$(DeployDir)" />
-	</Target>
 </Project>

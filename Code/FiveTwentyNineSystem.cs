@@ -5,7 +5,6 @@
 namespace FiveTwentyNineTiles
 {
     using System.Linq;
-    using System.Runtime.CompilerServices;
     using Colossal.Collections;
     using Colossal.Serialization.Entities;
     using Game;
@@ -21,16 +20,13 @@ namespace FiveTwentyNineTiles
     /// <summary>
     /// The 529 tile mod system.
     /// </summary>
-    internal sealed class FiveTwentyNineSystem : GameSystemBase, IPostDeserialize
+    internal sealed partial class FiveTwentyNineSystem : GameSystemBase, IPostDeserialize
     {
         // Query to find milestones.
         private EntityQuery _milestoneQuery;
 
         // Query to find map tiles.
         private EntityQuery _mapTileQuery;
-
-        // Type and job data.
-        private TypeHandle _typeHandle;
 
         /// <summary>
         /// Called by the game in post-deserialization.
@@ -65,19 +61,9 @@ namespace FiveTwentyNineTiles
         protected override void OnUpdate()
         {
             // Run update milestone job.
-            _typeHandle.__Game_Milestones_RW_ComponentTypeHandle.Update(ref CheckedStateRef);
             MilestoneJob milestoneJob = default;
-            milestoneJob.m_MilestoneDataType = _typeHandle.__Game_Milestones_RW_ComponentTypeHandle;
+            milestoneJob.m_MilestoneDataType = SystemAPI.GetComponentTypeHandle<MilestoneData>(false);
             milestoneJob.Run(_milestoneQuery);
-        }
-
-        /// <summary>
-        /// Called when created for compilation.
-        /// </summary>
-        protected override void OnCreateForCompiler()
-        {
-            base.OnCreateForCompiler();
-            _typeHandle.AssignHandles(ref CheckedStateRef);
         }
 
         /// <summary>
@@ -172,34 +158,6 @@ namespace FiveTwentyNineTiles
 
                     reference.m_MapTiles = newTileCount;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Struct containing type and job information.
-        /// </summary>
-        private struct TypeHandle
-        {
-            /// <summary>
-            /// Component type handle.
-            /// </summary>
-            internal ComponentTypeHandle<MilestoneData> __Game_Milestones_RW_ComponentTypeHandle;
-
-            /// <summary>
-            /// Entity type handle.
-            /// </summary>
-            [ReadOnly]
-            internal EntityTypeHandle __Unity_Entities_Entity_TypeHandle;
-
-            /// <summary>
-            /// Assigns handles.
-            /// </summary>
-            /// <param name="state">Unity <see cref="SystemState"/>.</param>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal void AssignHandles(ref SystemState state)
-            {
-                __Unity_Entities_Entity_TypeHandle = state.GetEntityTypeHandle();
-                __Game_Milestones_RW_ComponentTypeHandle = state.GetComponentTypeHandle<MilestoneData>(isReadOnly: false);
             }
         }
     }
