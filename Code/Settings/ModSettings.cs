@@ -57,7 +57,7 @@ namespace FiveTwentyNineTiles
         [XmlIgnore]
         [SettingsUIButton]
         [SettingsUISection("ResetModSettings")]
-        [SettingsUIConfirmation("ResetConfirmation")]
+        [SettingsUIConfirmation]
         public bool ResetModSettings
         {
             // Dummy getter.

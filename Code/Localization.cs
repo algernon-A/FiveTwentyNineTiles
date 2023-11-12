@@ -113,7 +113,7 @@ namespace FiveTwentyNineTiles
             {
                 "Options.OPTION" => settings.GetOptionLabelLocaleID(key),
                 "Options.OPTION_DESCRIPTION" => settings.GetOptionDescLocaleID(key),
-                "Options.WARNING" => "Options.WARNING[" + key + "]",
+                "Options.WARNING" => settings.GetOptionWarningLocaleID(key),
                 _ => settings.GetSettingsLocaleID(),
             };
         }
