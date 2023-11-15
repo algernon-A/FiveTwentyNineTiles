@@ -10,6 +10,7 @@ namespace FiveTwentyNineTiles
     using Game.Common;
     using Game.Prefabs;
     using Game.Serialization;
+    using Unity.Burst;
     using Unity.Collections;
     using Unity.Entities;
 
@@ -65,6 +66,7 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Job to reassign milestone tile counts.
         /// </summary>
+        [BurstCompile]
         public partial struct MilestoneJob : IJobEntity
         {
             /// <summary>
