@@ -4,6 +4,8 @@
 
 namespace FiveTwentyNineTiles
 {
+    using System.IO;
+    using System.Reflection;
     using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
@@ -20,23 +22,64 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public const string ModName = "529 Tiles";
 
+        // Mod assembly path cache.
+        private string s_assemblyPath = null;
+
+        /// <summary>
+        /// Gets the active instance reference.
+        /// </summary>
+        public static Mod Instance { get; private set; }
+
+        /// <summary>
+        /// Gets the mod directory file path of the currently executing mod assembly.
+        /// </summary>
+        public string AssemblyPath
+        {
+            get
+            {
+                // Update cached path if the existing one is invalid.
+                if (string.IsNullOrWhiteSpace(s_assemblyPath))
+                {
+                    // No path cached - find current executable asset.
+                    string assemblyName = Assembly.GetExecutingAssembly().FullName;
+                    ExecutableAsset modAsset = AssetDatabase.global.GetAsset(SearchFilter<ExecutableAsset>.ByCondition(x => x.definition?.FullName == assemblyName));
+                    if (modAsset is null)
+                    {
+                        Log.Error("mod executable asset not found");
+                        return null;
+                    }
+
+                    // Update cached path.
+                    s_assemblyPath = Path.GetDirectoryName(modAsset.GetMeta().path);
+                }
+
+                // Return cached path.
+                return s_assemblyPath;
+            }
+        }
+
         /// <summary>
         /// Gets the mod's active log.
         /// </summary>
-        internal static ILog Log { get; private set; }
+        internal ILog Log { get; private set; }
 
         /// <summary>
         /// Gets the mod's active settings configuration.
         /// </summary>
-        internal static ModSettings ActiveSettings { get; private set; }
+        internal ModSettings ActiveSettings { get; private set; }
 
         /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
         public void OnLoad()
         {
+            // Set instance reference.
+            Instance = this;
+
             // Initialize logger.
             Log = LogManager.GetLogger(ModName);
+            Log.Info("setting logging level to Debug");
+            Log.effectivenessLevel = Level.Debug;
             Log.Info("loading");
 
             // Apply harmony patches.

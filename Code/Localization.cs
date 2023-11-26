@@ -8,8 +8,6 @@ namespace FiveTwentyNineTiles
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
-    using Colossal.IO.AssetDatabase;
     using Colossal.Localization;
     using Colossal.Logging;
     using Game.Modding;
@@ -20,37 +18,6 @@ namespace FiveTwentyNineTiles
     /// </summary>
     public static class Localization
     {
-        // Mod assembly path cache.
-        private static string s_assemblyPath = null;
-
-        /// <summary>
-        /// Gets the mod directory file path of the currently executing mod assembly.
-        /// </summary>
-        public static string AssemblyPath
-        {
-            get
-            {
-                // Update cached path if the existing one is invalid.
-                if (string.IsNullOrWhiteSpace(s_assemblyPath))
-                {
-                    // No path cached - find current executable asset.
-                    string assemblyName = Assembly.GetExecutingAssembly().FullName;
-                    ExecutableAsset modAsset = AssetDatabase.global.GetAsset(SearchFilter<ExecutableAsset>.ByCondition(x => x.definition?.FullName == assemblyName));
-                    if (modAsset is null)
-                    {
-                        Mod.Log.Error("mod executable asset not found");
-                        return null;
-                    }
-
-                    // Update cached path.
-                    s_assemblyPath = Path.GetDirectoryName(modAsset.GetMeta().path);
-                }
-
-                // Return cached path.
-                return s_assemblyPath;
-            }
-        }
-
         /// <summary>
         /// Loads settings translations from tab-separated l10n file.
         /// </summary>
@@ -62,7 +29,7 @@ namespace FiveTwentyNineTiles
             {
                 log.Debug("attempting to load settings translations");
 
-                string translationFile = Path.Combine(AssemblyPath, "l10n.csv");
+                string translationFile = Path.Combine(Mod.Instance.AssemblyPath, "l10n.csv");
                 if (File.Exists(translationFile))
                 {
                     // Parse file.

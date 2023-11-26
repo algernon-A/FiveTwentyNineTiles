@@ -5,6 +5,7 @@
 namespace FiveTwentyNineTiles
 {
     using Colossal.Entities;
+    using Colossal.Logging;
     using Colossal.Serialization.Entities;
     using Game;
     using Game.Areas;
@@ -20,6 +21,8 @@ namespace FiveTwentyNineTiles
     /// </summary>
     internal sealed partial class FiveTwentyNineSystem : GameSystemBase, IPostDeserialize
     {
+        private ILog _log;
+
         // Query to find milestones.
         private EntityQuery _milestoneQuery;
 
@@ -36,7 +39,7 @@ namespace FiveTwentyNineTiles
         public void PostDeserialize(Context context)
         {
             // Unlock all tiles.
-            if (Mod.ActiveSettings.UnlockAll)
+            if (Mod.Instance.ActiveSettings.UnlockAll)
             {
                 EntityManager.RemoveComponent<Native>(_mapTileQuery.ToEntityArray(Allocator.Temp));
             }
@@ -48,6 +51,9 @@ namespace FiveTwentyNineTiles
         protected override void OnCreate()
         {
             base.OnCreate();
+
+            // Set log.
+            _log = Mod.Instance.Log;
 
             // Initialize queries.
             _milestoneQuery = GetEntityQuery(ComponentType.ReadWrite<MilestoneData>());
@@ -63,7 +69,7 @@ namespace FiveTwentyNineTiles
         protected override void OnUpdate()
         {
             // Don't update milestones if we're front-loading unlocks.
-            if (Mod.ActiveSettings.ExtraTilesAtStart)
+            if (Mod.Instance.ActiveSettings.ExtraTilesAtStart)
             {
                 // Unlock map tile purchasing feature.
                 PrefabSystem prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
@@ -88,7 +94,7 @@ namespace FiveTwentyNineTiles
                 }
 
                 // If we got here, something went wrong.
-                Mod.Log.Error("error unlocking initial map tile limit");
+                _log.Error("error unlocking initial map tile limit");
                 return;
             }
 
