@@ -2,6 +2,8 @@ scope	key	en-US
 Options.SECTION	[algernon.529Tiles]	529 Tiles
 Options.OPTION	UnlockAll	Unlock all tiles
 Options.OPTION_DESCRIPTION	UnlockAll	If this is selected then all tiles on the map will automatically be unlocked when you load into a city.
+Options.OPTION	ExtraTilesAtStart	Allocate extra tiles to start
+Options.OPTION_DESCRIPTION	ExtraTilesAtStart	If this is selected you will be able to unlock 88 tiles at the initial milestone.  Other milestone unlock amounts will remain unchanged.
 Options.OPTION	ResetModSettings	Reset to default
 Options.OPTION_DESCRIPTION	ResetModSettings	Resets all 529 Tiles mod settings to default.
 Options.WARNING	ResetConfirmation	Reset all 529 Tiles settings to default?  This cannot be undone.

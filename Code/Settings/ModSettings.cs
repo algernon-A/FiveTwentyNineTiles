@@ -44,6 +44,12 @@ namespace FiveTwentyNineTiles
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether the entire map should be unlocked on load.
+        /// </summary>
+        [SettingsUISection("ExtraTilesAtStart")]
+        public bool ExtraTilesAtStart { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets a value indicating whether, well, nothing really.
         /// This is just the inverse of <see cref="UnlockAll"/>, to ensure the the JSON contains at least one non-default value.
         /// This is to workaround a bug where the settings file isn't overwritten when there are no non-default settings.

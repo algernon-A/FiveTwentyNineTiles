@@ -4,6 +4,7 @@
 
 namespace FiveTwentyNineTiles
 {
+    using Colossal.Entities;
     using Colossal.Serialization.Entities;
     using Game;
     using Game.Areas;
@@ -24,6 +25,9 @@ namespace FiveTwentyNineTiles
 
         // Query to find map tiles.
         private EntityQuery _mapTileQuery;
+
+        // Query to find locked features.
+        private EntityQuery _featureQuery;
 
         /// <summary>
         /// Called by the game in post-deserialization.
@@ -48,6 +52,7 @@ namespace FiveTwentyNineTiles
             // Initialize queries.
             _milestoneQuery = GetEntityQuery(ComponentType.ReadWrite<MilestoneData>());
             _mapTileQuery = GetEntityQuery(ComponentType.ReadOnly<MapTile>());
+            _featureQuery = GetEntityQuery(ComponentType.ReadOnly<FeatureData>(), ComponentType.ReadOnly<PrefabData>(), ComponentType.ReadWrite<Locked>());
             RequireForUpdate(_milestoneQuery);
             RequireForUpdate(_mapTileQuery);
         }
@@ -57,6 +62,36 @@ namespace FiveTwentyNineTiles
         /// </summary>
         protected override void OnUpdate()
         {
+            // Don't update milestones if we're front-loading unlocks.
+            if (Mod.ActiveSettings.ExtraTilesAtStart)
+            {
+                // Unlock map tile purchasing feature.
+                PrefabSystem prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
+                foreach (Entity entity in _featureQuery.ToEntityArray(Allocator.Temp))
+                {
+                    if (EntityManager.TryGetComponent(entity, out PrefabData prefabData) && prefabSystem.GetPrefab<PrefabBase>(prefabData) is PrefabBase prefab)
+                    {
+                        // Looking for map tiles feature.
+                        if (prefab.name.Equals("Map Tiles"))
+                        {
+                            // Remove locking.
+                            EntityManager.RemoveComponent<Locked>(entity);
+                            EntityManager.RemoveComponent<UnlockRequirement>(entity);
+
+                            // Create new milestone entity with initial unlocked tile count.
+                            EntityManager.AddComponentData(EntityManager.CreateEntity(), new MilestoneData { m_MapTiles = 88 });
+
+                            // Done.
+                            return;
+                        }
+                    }
+                }
+
+                // If we got here, something went wrong.
+                Mod.Log.Error("error unlocking initial map tile limit");
+                return;
+            }
+
             // Run update milestone job.
             MilestoneJob milestoneJob = default;
             milestoneJob.m_MilestoneDataType = SystemAPI.GetComponentTypeHandle<MilestoneData>(false);
@@ -67,7 +102,7 @@ namespace FiveTwentyNineTiles
         /// Job to reassign milestone tile counts.
         /// </summary>
         [BurstCompile]
-        public partial struct MilestoneJob : IJobEntity
+        private partial struct MilestoneJob : IJobEntity
         {
             /// <summary>
             /// Data type handle (<see cref="MilestoneData"/>).
