@@ -38,39 +38,26 @@ namespace FiveTwentyNineTiles
         /// <param name="context">Game context.</param>
         public void PostDeserialize(Context context)
         {
-            // Unlock all tiles.
+            // Unlock all tiles, if that's what we're doing.
             if (Mod.Instance.ActiveSettings.UnlockAll)
             {
+                _log.Info("unlocking all tiles");
                 EntityManager.RemoveComponent<Native>(_mapTileQuery.ToEntityArray(Allocator.Temp));
+                return;
             }
-        }
 
-        /// <summary>
-        /// Called when the system is created.
-        /// </summary>
-        protected override void OnCreate()
-        {
-            base.OnCreate();
+            // Everything else requires a new game.
+            if (context.purpose != Purpose.NewGame)
+            {
+                _log.Info("not starting a new game");
+                return;
+            }
 
-            // Set log.
-            _log = Mod.Instance.Log;
-
-            // Initialize queries.
-            _milestoneQuery = GetEntityQuery(ComponentType.ReadWrite<MilestoneData>());
-            _mapTileQuery = GetEntityQuery(ComponentType.ReadOnly<MapTile>());
-            _featureQuery = GetEntityQuery(ComponentType.ReadOnly<FeatureData>(), ComponentType.ReadOnly<PrefabData>(), ComponentType.ReadWrite<Locked>());
-            RequireForUpdate(_milestoneQuery);
-            RequireForUpdate(_mapTileQuery);
-        }
-
-        /// <summary>
-        /// Called every update.
-        /// </summary>
-        protected override void OnUpdate()
-        {
-            // Don't update milestones if we're front-loading unlocks.
+            // Unlock extra tiles at start if that's what we're doing.
             if (Mod.Instance.ActiveSettings.ExtraTilesAtStart)
             {
+                _log.Info("allocating extra tiles to start");
+
                 // Unlock map tile purchasing feature.
                 PrefabSystem prefabSystem = World.GetOrCreateSystemManaged<PrefabSystem>();
                 foreach (Entity entity in _featureQuery.ToEntityArray(Allocator.Temp))
@@ -95,13 +82,41 @@ namespace FiveTwentyNineTiles
 
                 // If we got here, something went wrong.
                 _log.Error("error unlocking initial map tile limit");
-                return;
             }
 
-            // Run update milestone job.
-            MilestoneJob milestoneJob = default;
-            milestoneJob.m_MilestoneDataType = SystemAPI.GetComponentTypeHandle<MilestoneData>(false);
-            milestoneJob.Run(_milestoneQuery);
+            // Otherwise, assign extra tiles to milestones, if that's what we're doing.
+            else if (Mod.Instance.ActiveSettings.AssignToMilestones)
+            {
+                _log.Info("updating milestones");
+
+                // Run update milestone job.
+                MilestoneJob milestoneJob = default;
+                milestoneJob.m_MilestoneDataType = SystemAPI.GetComponentTypeHandle<MilestoneData>(false);
+                milestoneJob.Run(_milestoneQuery);
+            }
+        }
+
+        /// <summary>
+        /// Called when the system is created.
+        /// </summary>
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+
+            // Set log.
+            _log = Mod.Instance.Log;
+
+            // Initialize queries.
+            _milestoneQuery = GetEntityQuery(ComponentType.ReadWrite<MilestoneData>());
+            _mapTileQuery = GetEntityQuery(ComponentType.ReadOnly<MapTile>());
+            _featureQuery = GetEntityQuery(ComponentType.ReadOnly<FeatureData>(), ComponentType.ReadOnly<PrefabData>(), ComponentType.ReadWrite<Locked>());
+        }
+
+        /// <summary>
+        /// Called every update.
+        /// </summary>
+        protected override void OnUpdate()
+        {
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Title>529 tiles</Title>
+		<Title>529 Tiles Lite</Title>
 		<AssemblyTitle>$(Title)</AssemblyTitle>
 		<Description>A Cities: Skylines 2 mod.</Description>
 		<Authors>algernon</Authors>
-		<Copyright>Copyright © 2023 algernon</Copyright>
+		<Copyright>Copyright © 2023 algernon (github.com/algernon-A). All rights reserved.</Copyright>
 		<Product>$(Title)</Product>
 		<Version>0.2</Version>
 		<LangVersion>9.0</LangVersion>
@@ -19,9 +19,9 @@
 		<AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Include="Config/PostBuild.csproj" />
-	  <None Include="Config/References.csproj" />
-	  <None Include="Config/Targets.csproj" />
+		<None Include="Config/PostBuild.csproj" />
+		<None Include="Config/References.csproj" />
+		<None Include="Config/Targets.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
@@ -31,8 +31,8 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="l10n.csv">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<None Update="l10n.csv">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>
