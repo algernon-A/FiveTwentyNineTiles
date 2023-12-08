@@ -1,5 +1,7 @@
 ﻿// <copyright file="Localization.cs" company="algernon (K. Algernon A. Sheppard)">
 // Copyright (c) algernon (K. Algernon A. Sheppard). All rights reserved.
+// Licensed under the Apache Licence, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+// See LICENSE.txt file in the project root for full license information.
 // </copyright>
 
 namespace FiveTwentyNineTiles
@@ -44,7 +46,7 @@ namespace FiveTwentyNineTiles
                             // Find matching column in file.
                             int valueColumn = Array.IndexOf(fileLines.First(), localeID);
 
-                            // Make sure a valid column has been found (column 0 is the context and column 1 is the translation key).
+                            // Make sure a valid column has been found (column 0 is the binding context and column 1 is the translation key).
                             if (valueColumn > 1)
                             {
                                 log.Debug("found translation for " + localeID);
