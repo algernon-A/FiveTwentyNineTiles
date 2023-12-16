@@ -10,7 +10,7 @@
 		<LangVersion>9.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<TargetFramework>net472</TargetFramework>
-		<Configurations>Steam</Configurations>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<Import Project="Config/References.csproj" />
