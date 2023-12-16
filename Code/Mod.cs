@@ -6,8 +6,6 @@
 
 namespace FiveTwentyNineTiles
 {
-    using System.IO;
-    using System.Reflection;
     using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
