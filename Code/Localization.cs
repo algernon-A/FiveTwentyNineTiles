@@ -10,6 +10,7 @@ namespace FiveTwentyNineTiles
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using Colossal.Localization;
     using Colossal.Logging;
     using Game.Modding;
@@ -29,16 +30,18 @@ namespace FiveTwentyNineTiles
         {
             try
             {
-                log.Debug("attempting to load settings translations");
-
-                string translationFile = Path.Combine(Mod.Instance.AssemblyPath, "l10n.csv");
-                if (File.Exists(translationFile))
+                // Read embedded file.
+                using StreamReader reader = new (Assembly.GetExecutingAssembly().GetManifestResourceStream("FiveTwentyNineTilesLite.l10n.csv"));
                 {
-                    // Parse file.
-                    log.Debug("parsing translation file " + translationFile);
-                    IEnumerable<string[]> fileLines = File.ReadAllLines(translationFile).Select(x => x.Split('\t'));
+                    List<string> lines = new ();
+                    while (!reader.EndOfStream)
+                    {
+                        lines.Add(reader.ReadLine());
+                    }
 
                     // Iterate through each game locale.
+                    log.Debug("parsing translation file");
+                    IEnumerable<string[]> fileLines = lines.Select(x => x.Split('\t'));
                     foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
                     {
                         try
@@ -49,15 +52,15 @@ namespace FiveTwentyNineTiles
                             // Make sure a valid column has been found (column 0 is the binding context and column 1 is the translation key).
                             if (valueColumn > 1)
                             {
-                                log.Debug("found translation for " + localeID);
-
                                 // Add translations to game locales.
+                                log.Debug("found translation for " + localeID);
                                 MemorySource language = new (fileLines.Skip(1).ToDictionary(x => GenerateOptionsKey(x[0], x[1], settings), x => x.ElementAtOrDefault(valueColumn)));
                                 GameManager.instance.localizationManager.AddSource(localeID, language);
                             }
                         }
                         catch (Exception e)
                         {
+                            // Don't let a single failure stop us.
                             log.Error(e, "exception reading localization for locale " + localeID);
                         }
                     }
