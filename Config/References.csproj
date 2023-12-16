@@ -10,9 +10,6 @@
 		<Reference Include="Colossal.Core">
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Colossal.Collections">
-			<Private>false</Private>
-		</Reference>
 		<Reference Include="Colossal.IO.AssetDatabase">
 			<Private>false</Private>
 		</Reference>
@@ -25,10 +22,10 @@
 		<Reference Include="Colossal.Mathematics">
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="Colossal.Mono.Cecil">
+		<Reference Include="Colossal.UI">
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="UnityEngine.CoreModule">
+		<Reference Include="Colossal.UI.Binding">
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="Unity.Burst">
@@ -43,49 +40,19 @@
 		<Reference Include="Unity.Mathematics">
 			<Private>false</Private>
 		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<Private>false</Private>
+		</Reference>
 	</ItemGroup>
+
 	<ItemGroup>
 		<Reference Update="System">
 			<Private>false</Private>
 		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<Reference Update="System.Core">
 			<Private>false</Private>
 		</Reference>
-	</ItemGroup>
-	<ItemGroup>
 		<Reference Update="System.Data">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.Drawing">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.IO.Compression.FileSystem">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.Numerics">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.Runtime.Serialization">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.Xml">
-			<Private>false</Private>
-		</Reference>
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Update="System.Xml.Linq">
 			<Private>false</Private>
 		</Reference>
 	</ItemGroup>
