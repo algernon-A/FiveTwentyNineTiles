@@ -9,19 +9,19 @@
 		<Version>0.3</Version>
 		<LangVersion>9.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<TargetFramework>net472</TargetFramework>
+		<Configurations>Steam</Configurations>
 	</PropertyGroup>
 
-	<Import Project="Config/Postbuild.csproj" />
-	<Import Project="Config/Targets.csproj" />
 	<Import Project="Config/References.csproj" />
+	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.props" />
+	<Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets" />
 
 	<ItemGroup>
 		<AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="Config/PostBuild.csproj" />
-		<None Include="Config/References.csproj" />
-		<None Include="Config/Targets.csproj" />
+	  <None Include="Config/References.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
