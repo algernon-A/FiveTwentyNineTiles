@@ -11,6 +11,8 @@
 		<TargetFramework>net472</TargetFramework>
 		<LangVersion>9.0</LangVersion>
 		<Configurations>Debug;Release</Configurations>
+		<PDXAccountDataPath>$(USERPROFILE)\Documents\pdx_account.txt</PDXAccountDataPath>
+		<PublishConfigurationPath>Properties\PublishConfiguration.xml</PublishConfigurationPath>
 	</PropertyGroup>
 
 	<Import Project="Config/References.csproj" />

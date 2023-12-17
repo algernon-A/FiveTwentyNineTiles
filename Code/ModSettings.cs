@@ -114,7 +114,7 @@ namespace FiveTwentyNineTiles
         public bool Contra { get; set; } = false;
 
         /// <summary>
-        /// Gets or sets a value indicating whether the mod's settings should be reset.
+        /// Sets a value indicating whether the mod's settings should be reset.
         /// </summary>
         [XmlIgnore]
         [SettingsUIButton]
@@ -122,9 +122,6 @@ namespace FiveTwentyNineTiles
         [SettingsUIConfirmation]
         public bool ResetModSettings
         {
-            // Dummy getter.
-            get => false;
-
             set
             {
                 // Apply defaults.
