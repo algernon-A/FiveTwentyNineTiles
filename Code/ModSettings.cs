@@ -33,7 +33,7 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
         /// </summary>
-        [SettingsUISection("UnlockAll")]
+        [SettingsUISection("UnlockMode")]
         public bool UnlockAll
         {
             get => _unlockAll;
@@ -60,7 +60,7 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
         /// </summary>
-        [SettingsUISection("ExtraTilesAtStart")]
+        [SettingsUISection("UnlockMode")]
         public bool ExtraTilesAtStart
         {
             get => _extraAtStart;
@@ -84,7 +84,7 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
         /// </summary>
-        [SettingsUISection("AssignToMilestones")]
+        [SettingsUISection("UnlockMode")]
         public bool AssignToMilestones
         {
             get => _milestones;
@@ -104,6 +104,13 @@ namespace FiveTwentyNineTiles
                 EnsureState();
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether there should be no unlocked starting tiles when starting a new map.
+        /// </summary>
+        [SettingsUIHideByCondition(typeof(ModSettings), nameof(StartingTilesHidden))]
+        [SettingsUISection("StartingOptions")]
+        public bool NoStartingTiles { get; set; } = false;
 
         /// <summary>
         /// Gets or sets a value indicating whether, well, nothing really.
@@ -143,7 +150,15 @@ namespace FiveTwentyNineTiles
             _unlockAll = true;
             _extraAtStart = false;
             _milestones = false;
+
+            NoStartingTiles = false;
         }
+
+        /// <summary>
+        /// Returns a value indicating whether the no starting tiles option should be hidden.
+        /// </summary>
+        /// <returns><c>true</c> (hide starting tiles option) if 'Unlock all tiles' is selected, <c>false</c> (don't hide) otherwise.</returns>
+        public bool StartingTilesHidden() => UnlockAll;
 
         /// <summary>
         /// Enables Unlock All as the default option and that no options are duplicated.
