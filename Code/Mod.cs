@@ -40,7 +40,8 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Called by the game when the mod is loaded.
         /// </summary>
-        public void OnLoad()
+        /// <param name="updateSystem">Game update system.</param>
+        public void OnLoad(UpdateSystem updateSystem)
         {
             // Set instance reference.
             Instance = this;

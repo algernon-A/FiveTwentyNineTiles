@@ -31,16 +31,21 @@ namespace FiveTwentyNineTiles
             try
             {
                 // Read embedded file.
-                using StreamReader reader = new (Assembly.GetExecutingAssembly().GetManifestResourceStream("FiveTwentyNineTiles.l10n.csv"));
+                using StreamReader reader = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("FiveTwentyNineTilesLite.l10n.csv"));
                 {
-                    List<string> lines = new ();
+                    List<string> lines = new();
                     while (!reader.EndOfStream)
                     {
-                        lines.Add(reader.ReadLine());
+                        // Skip empty lines.
+                        string line = reader.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            lines.Add(line);
+                        }
                     }
 
                     // Iterate through each game locale.
-                    log.Debug("parsing translation file");
+                    log.Info("parsing translation file");
                     IEnumerable<string[]> fileLines = lines.Select(x => x.Split('\t'));
                     foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
                     {
@@ -54,14 +59,14 @@ namespace FiveTwentyNineTiles
                             {
                                 // Add translations to game locales.
                                 log.Debug("found translation for " + localeID);
-                                MemorySource language = new (fileLines.Skip(1).ToDictionary(x => GenerateOptionsKey(x[0], x[1], settings), x => x.ElementAtOrDefault(valueColumn)));
+                                MemorySource language = new(fileLines.Skip(1).ToDictionary(x => GenerateOptionsKey(x[0], x[1], settings), x => x.ElementAtOrDefault(valueColumn)));
                                 GameManager.instance.localizationManager.AddSource(localeID, language);
                             }
                         }
                         catch (Exception e)
                         {
                             // Don't let a single failure stop us.
-                            log.Error(e, "exception reading localization for locale " + localeID);
+                            log.Error(e, $"exception reading localization for locale {localeID}");
                         }
                     }
                 }
