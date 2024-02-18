@@ -31,7 +31,7 @@ namespace FiveTwentyNineTiles
             try
             {
                 // Read embedded file.
-                using StreamReader reader = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("FiveTwentyNineTilesLite.l10n.csv"));
+                using StreamReader reader = new(Assembly.GetExecutingAssembly().GetManifestResourceStream("FiveTwentyNineTiles.l10n.csv"));
                 {
                     List<string> lines = new();
                     while (!reader.EndOfStream)

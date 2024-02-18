@@ -14,7 +14,6 @@ namespace FiveTwentyNineTiles
     using Game.Common;
     using Game.Prefabs;
     using Game.Serialization;
-    using Unity.Burst;
     using Unity.Collections;
     using Unity.Entities;
 
@@ -50,6 +49,20 @@ namespace FiveTwentyNineTiles
                 EntityManager.AddComponent<Deleted>(entity);
             }
 
+            // Re-lock tiles, if that's what we're doing.
+            if (Mod.Instance.ActiveSettings.RelockAllTiles)
+            {
+                _log.Info("re-locking all tiles");
+                NativeArray<Entity> mapTiles = _mapTileQuery.ToEntityArray(Allocator.Temp);
+                foreach (Entity mapTile in mapTiles)
+                {
+                    if (!EntityManager.HasComponent<Native>(mapTile))
+                    {
+                        EntityManager.AddComponent<Native>(mapTile);
+                    }
+                }
+            }
+
             // Unlock all tiles, if that's what we're doing.
             if (Mod.Instance.ActiveSettings.UnlockAll)
             {
@@ -73,18 +86,40 @@ namespace FiveTwentyNineTiles
                 EntityManager.AddComponentData(extraMilestone, new CustomMilestone { });
             }
 
-            // Otherwise, assign extra tiles to milestones, if that's what we're doing.
+            // Otherwise assign extra tiles to the final milestone, if that's what we're doing.
+            else if (Mod.Instance.ActiveSettings.ExtraTilesAtEnd)
+            {
+                // Iterate through milestones, looking for the last one.
+                foreach (Entity entity in _milestoneQuery.ToEntityArray(Allocator.Temp))
+                {
+                    // Final milestone has index of 20.
+                    if (EntityManager.TryGetComponent(entity, out MilestoneData milestone) && milestone.m_Index == 20)
+                    {
+                        milestone.m_MapTiles += 88;
+                        EntityManager.SetComponentData(entity, milestone);
+
+                        // All done here.
+                        break;
+                    }
+                }
+            }
+
+            // Otherwise, assign extra tiles across all milestones, if that's what we're doing.
             else if (Mod.Instance.ActiveSettings.AssignToMilestones)
             {
                 _log.Info("updating milestones");
 
-                // Run update milestone job.
-                MilestoneJob milestoneJob = default;
-                milestoneJob.m_MilestoneDataType = SystemAPI.GetComponentTypeHandle<MilestoneData>(false);
-                milestoneJob.Run(_milestoneQuery);
+                foreach (Entity entity in _milestoneQuery.ToEntityArray(Allocator.Temp))
+                {
+                    if (EntityManager.TryGetComponent(entity, out MilestoneData milestone))
+                    {
+                        UpdateMilestone(ref milestone);
+                        EntityManager.SetComponentData(entity, milestone);
+                    }
+                }
             }
 
-            // Remove all unlocked tiles if this is a new game. and we're starting with no unlocked tiles.
+            // Remove all unlocked tiles if this is a new game and we're starting with no unlocked tiles.
             if (context.purpose == Purpose.NewGame && Mod.Instance.ActiveSettings.NoStartingTiles)
             {
                 // Ensure purchasing feature is unlocked before clearing all tiles.
@@ -141,85 +176,73 @@ namespace FiveTwentyNineTiles
         }
 
         /// <summary>
-        /// Job to reassign milestone tile counts.
+        /// Updates a given milestone to increase the number of unlockable map tiles.
         /// </summary>
-        [BurstCompile]
-        private partial struct MilestoneJob : IJobEntity
+        /// <param name="milestone">Milestone to alter.</param>
+        private void UpdateMilestone(ref MilestoneData milestone)
         {
-            /// <summary>
-            /// Data type handle (<see cref="MilestoneData"/>).
-            /// </summary>
-            public ComponentTypeHandle<MilestoneData> m_MilestoneDataType;
-
-            /// <summary>
-            /// Job execution.
-            /// </summary>
-            /// <param name="milestone"><see cref="MilestoneData"/> component.</param>
-            public readonly void Execute(ref MilestoneData milestone)
+            switch (milestone.m_Index)
             {
-                switch (milestone.m_MapTiles)
-                {
-                    case 3:
-                        milestone.m_MapTiles = 4;
-                        break;
-                    case 4:
-                        milestone.m_MapTiles = 5;
-                        break;
-                    case 5:
-                        milestone.m_MapTiles = 7;
-                        break;
-                    case 6:
-                        milestone.m_MapTiles = 7;
-                        break;
-                    case 7:
-                        milestone.m_MapTiles = 8;
-                        break;
-                    case 8:
-                        milestone.m_MapTiles = 10;
-                        break;
-                    case 9:
-                        milestone.m_MapTiles = 11;
-                        break;
-                    case 10:
-                        milestone.m_MapTiles = 12;
-                        break;
-                    case 12:
-                        milestone.m_MapTiles = 14;
-                        break;
-                    case 15:
-                        milestone.m_MapTiles = 18;
-                        break;
-                    case 18:
-                        milestone.m_MapTiles = 22;
-                        break;
-                    case 21:
-                        milestone.m_MapTiles = 25;
-                        break;
-                    case 24:
-                        milestone.m_MapTiles = 29;
-                        break;
-                    case 28:
-                        milestone.m_MapTiles = 34;
-                        break;
-                    case 32:
-                        milestone.m_MapTiles = 38;
-                        break;
-                    case 36:
-                        milestone.m_MapTiles = 43;
-                        break;
-                    case 41:
-                        milestone.m_MapTiles = 49;
-                        break;
-                    case 46:
-                        milestone.m_MapTiles = 55;
-                        break;
-                    case 51:
-                        milestone.m_MapTiles = 61;
-                        break;
-                    case 56:
-                        milestone.m_MapTiles = 68;
-                        break;
-                }
+                case 1:
+                    milestone.m_MapTiles = 4;
+                    break;
+                case 2:
+                    milestone.m_MapTiles = 5;
+                    break;
+                case 3:
+                    milestone.m_MapTiles = 7;
+                    break;
+                case 4:
+                    milestone.m_MapTiles = 7;
+                    break;
+                case 5:
+                    milestone.m_MapTiles = 8;
+                    break;
+                case 6:
+                    milestone.m_MapTiles = 10;
+                    break;
+                case 7:
+                    milestone.m_MapTiles = 11;
+                    break;
+                case 8:
+                    milestone.m_MapTiles = 12;
+                    break;
+                case 9:
+                    milestone.m_MapTiles = 14;
+                    break;
+                case 10:
+                    milestone.m_MapTiles = 18;
+                    break;
+                case 11:
+                    milestone.m_MapTiles = 22;
+                    break;
+                case 12:
+                    milestone.m_MapTiles = 25;
+                    break;
+                case 13:
+                    milestone.m_MapTiles = 29;
+                    break;
+                case 14:
+                    milestone.m_MapTiles = 34;
+                    break;
+                case 15:
+                    milestone.m_MapTiles = 38;
+                    break;
+                case 16:
+                    milestone.m_MapTiles = 43;
+                    break;
+                case 17:
+                    milestone.m_MapTiles = 49;
+                    break;
+                case 18:
+                    milestone.m_MapTiles = 55;
+                    break;
+                case 19:
+                    milestone.m_MapTiles = 61;
+                    break;
+                case 20:
+                    milestone.m_MapTiles = 68;
+                    break;
             }
         }
 
