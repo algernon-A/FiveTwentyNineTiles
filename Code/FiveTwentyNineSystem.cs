@@ -27,8 +27,11 @@ namespace FiveTwentyNineTiles
         // Query to find milestones.
         private EntityQuery _milestoneQuery;
 
-        // Query to find map tiles.
-        private EntityQuery _mapTileQuery;
+        // Query to find a;; map tiles.
+        private EntityQuery _lockedMapTileQuery;
+
+        // Query to find unlocked map tiles.
+        private EntityQuery _unlockedMapTileQuery;
 
         // Query to find locked features.
         private EntityQuery _featureQuery;
@@ -49,26 +52,13 @@ namespace FiveTwentyNineTiles
                 EntityManager.AddComponent<Deleted>(entity);
             }
 
-            // Re-lock tiles, if that's what we're doing.
-            if (Mod.Instance.ActiveSettings.RelockAllTiles)
-            {
-                _log.Info("re-locking all tiles");
-                NativeArray<Entity> mapTiles = _mapTileQuery.ToEntityArray(Allocator.Temp);
-                foreach (Entity mapTile in mapTiles)
-                {
-                    if (!EntityManager.HasComponent<Native>(mapTile))
-                    {
-                        EntityManager.AddComponent<Native>(mapTile);
-                    }
-                }
-            }
-
             // Unlock all tiles, if that's what we're doing.
             if (Mod.Instance.ActiveSettings.UnlockAll)
             {
                 _log.Info("unlocking all tiles");
-                EntityManager.RemoveComponent<Native>(_mapTileQuery.ToEntityArray(Allocator.Temp));
+                EntityManager.RemoveComponent<Native>(_lockedMapTileQuery.ToEntityArray(Allocator.Temp));
 
+                // All done - no point in doing anything else.
                 return;
             }
 
@@ -89,6 +79,8 @@ namespace FiveTwentyNineTiles
             // Otherwise assign extra tiles to the final milestone, if that's what we're doing.
             else if (Mod.Instance.ActiveSettings.ExtraTilesAtEnd)
             {
+                _log.Info("allocating extra tiles to final milestone");
+
                 // Iterate through milestones, looking for the last one.
                 foreach (Entity entity in _milestoneQuery.ToEntityArray(Allocator.Temp))
                 {
@@ -119,12 +111,23 @@ namespace FiveTwentyNineTiles
                 }
             }
 
+            // Re-lock tiles, if that's what we're doing.
+            if (Mod.Instance.ActiveSettings.RelockAllTiles)
+            {
+                _log.Info("re-locking all tiles");
+                EntityManager.AddComponent<Native>(_unlockedMapTileQuery.ToEntityArray(Allocator.Temp));
+
+                return;
+            }
+
             // Remove all unlocked tiles if this is a new game and we're starting with no unlocked tiles.
             if (context.purpose == Purpose.NewGame && Mod.Instance.ActiveSettings.NoStartingTiles)
             {
-                // Ensure purchasing feature is unlocked before clearing all tiles.
+                _log.Info("locking all tiles");
+
+                // Ensure purchasing feature is unlocked before locking all tiles.
                 EnableTilePurchasing();
-                EntityManager.AddComponent<Native>(_mapTileQuery.ToEntityArray(Allocator.Temp));
+                EntityManager.AddComponent<Native>(_unlockedMapTileQuery.ToEntityArray(Allocator.Temp));
             }
         }
 
@@ -139,12 +142,11 @@ namespace FiveTwentyNineTiles
             _log = Mod.Instance.Log;
 
             // Initialize queries.
-            _milestoneQuery = GetEntityQuery(ComponentType.ReadWrite<MilestoneData>());
-            _mapTileQuery = GetEntityQuery(ComponentType.ReadOnly<MapTile>());
-            _featureQuery = GetEntityQuery(ComponentType.ReadOnly<FeatureData>(), ComponentType.ReadOnly<PrefabData>(), ComponentType.ReadWrite<Locked>());
-            _customMilestoneQuery = GetEntityQuery(ComponentType.ReadWrite<CustomMilestone>());
-            RequireForUpdate(_milestoneQuery);
-            RequireForUpdate(_mapTileQuery);
+            _milestoneQuery = SystemAPI.QueryBuilder().WithAllRW<MilestoneData>().Build();
+            _lockedMapTileQuery = SystemAPI.QueryBuilder().WithAll<MapTile>().WithAllRW<Native>().Build();
+            _unlockedMapTileQuery = SystemAPI.QueryBuilder().WithAll<MapTile>().WithNone<Native>().Build();
+            _featureQuery = SystemAPI.QueryBuilder().WithAll<FeatureData, PrefabData>().WithAllRW<Locked>().Build();
+            _customMilestoneQuery = SystemAPI.QueryBuilder().WithAllRW<CustomMilestone>().Build();
         }
 
         /// <summary>
