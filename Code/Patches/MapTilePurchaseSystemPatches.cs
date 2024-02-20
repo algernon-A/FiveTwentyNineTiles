@@ -21,7 +21,7 @@ namespace FiveTwentyNineTiles
     internal static class MapTilePurchaseSystemPatches
     {
         /// <summary>
-        /// Harmony transpiler for <c>MapTilePurchaseSystem.UpdateStatus</c> to override the "insufficient funds" cost check.
+        /// Harmony transpiler for <c>MapTilePurchaseSystem.UpdateStatus</c> to cap the cost for new tiles beyond 441.
         /// </summary>
         /// <param name="instructions">Original ILCode.</param>
         /// <param name="original">Method being patched.</param>
@@ -30,7 +30,11 @@ namespace FiveTwentyNineTiles
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> UpdateStatusTranspiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
         {
-            Patcher.Instance.Log.Info("transpiling " + original.DeclaringType + '.' + original.Name);
+            Mod.Instance.Log.Info("transpiling " + original.DeclaringType + '.' + original.Name);
+
+            // Lower bounds check for free first nine tiles.
+            FieldInfo m_Cost = AccessTools.Field(typeof(MapTilePurchaseSystem), "m_Cost");
+            bool firstCost = false;
 
             // Parse instructions.
             IEnumerator<CodeInstruction> instructionEnumerator = instructions.GetEnumerator();
@@ -41,7 +45,7 @@ namespace FiveTwentyNineTiles
                 // Look for ldloc.s 5 followed by add (only instance in target).
                 if (instruction.opcode == OpCodes.Ldloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 5)
                 {
-                    Patcher.Instance.Log.Debug("found ldloc.s 5");
+                    Mod.Instance.Log.Debug("found ldloc.s 5");
                     yield return instruction;
 
                     // Check for following add.
@@ -49,7 +53,7 @@ namespace FiveTwentyNineTiles
                     instruction = instructionEnumerator.Current;
                     if (instruction.opcode == OpCodes.Add)
                     {
-                        Patcher.Instance.Log.Debug("found add");
+                        Mod.Instance.Log.Debug("found add");
                         yield return instruction;
 
                         // Insert call to math.min(x, 441).
@@ -60,8 +64,45 @@ namespace FiveTwentyNineTiles
                     }
                 }
 
+                // Otherwise, looking for second store to MapTilePurchaseSystem.m_Cost.
+                else if (instruction.StoresField(m_Cost))
+                {
+                    if (!firstCost)
+                    {
+                        firstCost = true;
+                    }
+                    else
+                    {
+                        // Insert call to our custom method.
+                        Mod.Instance.Log.Debug("found second m_Cost store");
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 5);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 6);
+                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MapTilePurchaseSystemPatches), nameof(CheckFreeTiles)));
+                    }
+                }
+
                 yield return instruction;
             }
+        }
+
+        /// <summary>
+        /// Checks to see if this tile is one of the first nine; if so, the cost is free.
+        /// </summary>
+        /// <param name="cost">Calculated tile cost.</param>
+        /// <param name="numTiles">Number of selected tiles processed this update.</param>
+        /// <param name="ownedTiles">Number of already owned tiles.</param>
+        /// <returns>0 if this tile is one of the first nine, otherwise returns the calculated cost.</returns>
+        private static float CheckFreeTiles(float cost, int numTiles, int ownedTiles)
+        {
+            // Check tile count.
+            if (numTiles + ownedTiles <= 9)
+            {
+                // First nine tiles - return free tile.
+                return 0f;
+            }
+
+            // Otherwise, not free - return the calculated cost.
+            return cost;
         }
     }
 }
