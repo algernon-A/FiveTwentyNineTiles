@@ -9,6 +9,7 @@ namespace FiveTwentyNineTiles
     using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
+    using Game.Areas;
     using Game.Modding;
     using Game.Serialization;
 
@@ -66,26 +67,9 @@ namespace FiveTwentyNineTiles
 
             // Load saved settings.
             AssetDatabase.global.LoadSettings("529TileSettings", ActiveSettings, new ModSettings(this));
-        }
 
-        /// <summary>
-        /// Called by the game when the game world is created.
-        /// </summary>
-        /// <param name="updateSystem">Game update system.</param>
-        public void OnCreateWorld(UpdateSystem updateSystem)
-        {
-            Log.Info("starting OnCreateWorld");
-
-            // Don't do anything if Harmony patches weren't applied.
-            if (Patcher.Instance is null || !Patcher.Instance.PatchesApplied)
-            {
-                Log.Critical("Harmony patches not applied; aborting system activation");
-                return;
-            }
-
-            // Activate systems.
-            updateSystem.UpdateAfter<FiveTwentyNineSystem>(SystemUpdatePhase.Deserialize);
-            updateSystem.UpdateAfter<PostDeserialize<FiveTwentyNineSystem>>(SystemUpdatePhase.Deserialize);
+            // Enable system.
+            updateSystem.UpdateAfter<PostDeserialize<FiveTwentyNineSystem>, PostDeserialize<MapTileSystem>>(SystemUpdatePhase.Deserialize);
         }
 
         /// <summary>
