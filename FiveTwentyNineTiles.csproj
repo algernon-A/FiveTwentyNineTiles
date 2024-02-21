@@ -25,13 +25,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="l10n.csv">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</EmbeddedResource>
+		<EmbeddedResource Include="l10n\de-DE.csv" />
+		<EmbeddedResource Include="l10n\en-US.csv" />
+		<EmbeddedResource Include="l10n\es-ES.csv" />
+		<EmbeddedResource Include="l10n\ja-JP.csv" />
+		<EmbeddedResource Include="l10n\ko-KR.csv" />
+		<EmbeddedResource Include="l10n\ru-RU.csv" />
+		<EmbeddedResource Include="l10n\zh-HANS.csv" />
+		<EmbeddedResource Include="l10n\zh-HANT.csv" />
 	</ItemGroup>
-	<ItemGroup>
-		<None Include="Config/References.csproj" />
-	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="Lib.Harmony" Version="2.2.2" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
