@@ -1,13 +1,4 @@
-<Publish>
-  <!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
-  <ModId Value="74328" />
-  <!--Name of the mod to display to players-->
-  <DisplayName Value="529 Tiles" />
-  <!--Short description of the mod-->
-  <ShortDescription Value="Unlock all map tiles" />
-  <!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
-  <!--LongDescription Value="This is a very, very, very long description." /-->
-  <LongDescription>Enables access to all 529 map tiles, with a choice of one of four methods:
+Enables access to all 529 map tiles, with a choice of one of four methods:
 - **Unlock all tiles:** automatically and immediately unlocks all tiles on the map when you start a new city (or load an existing one). Quite straightforward.
 - **Provide extra tiles at start:** adds 88 immediately-available tile unlocks when you first start a new city (all milestones will add their usual amount of tile unlocks on top of this); this enables flexibility with your initial start.
 - **Provide extra tiles at final milestone:** allocates the additional 88 tile unlocks to the final game milestone.  All earlier milestones are unchanged.
@@ -34,26 +25,3 @@ This mod supports localization. Please help out with translating this mod into d
 
 ### Modders
 Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods. Come grab me on the Cities: Skylines Modding Discord!
-)</LongDescription>
-  <!--Thumbnail-->
-  <Thumbnail Value="Properties/Thumbnail.png" />
-  <!--Screenshot, can be set multiple-->
-  <Screenshot Value="Properties/529TilesOptions.png" />
-  <!--Tag, can be set multiple-->
-  <Tag Value="Code Mod" />
-  <!--Link to the forum post where the mod can be discussed-->
-  <ForumLink Value="" />
-  <!--Version of the mod-->
-  <ModVersion Value="0.9" />
-  <!--Recommended version of the base game to use the mod-->
-  <GameVersion Value="1.0.*" />
-  <!--Dependency for the mod, can be set multiple-->
-  <Dependency Id="" DisplayName="" Version="" />
-  <!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
-  <ChangeLog Value="Update publish configuration." />
-  <!--ChangeLog>
-	</ChangeLog-->
-  <!--External link. supported types are discord, github, youtube, twitch, x, paypal, patreon-->
-  <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
-  <ExternalLink Type="discord" Url="https://discord.gg/7rTsfUdfTf" />
-</Publish>
