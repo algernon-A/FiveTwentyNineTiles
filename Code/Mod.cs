@@ -6,6 +6,7 @@
 
 namespace FiveTwentyNineTiles
 {
+    using System.Reflection;
     using Colossal.IO.AssetDatabase;
     using Colossal.Logging;
     using Game;
@@ -53,7 +54,7 @@ namespace FiveTwentyNineTiles
             Log.Info("setting logging level to Debug");
             Log.effectivenessLevel = Level.Debug;
 #endif
-            Log.Info("loading");
+            Log.Info($"loading {ModName} version {Assembly.GetExecutingAssembly().GetName().Version}");
 
             // Apply harmony patches.
             new Patcher("algernon-529Tiles", Log);
