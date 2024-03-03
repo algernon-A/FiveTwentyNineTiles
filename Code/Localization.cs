@@ -49,7 +49,7 @@ namespace FiveTwentyNineTiles
             {
                 foreach (string localeID in GameManager.instance.localizationManager.GetSupportedLocales())
                 {
-                    string resourceName = $"{thisAssembly.GetName().Name}.l10n.{localeID}csv";
+                    string resourceName = $"{thisAssembly.GetName().Name}.l10n.{localeID}.csv";
                     if (resourceNames.Contains(resourceName))
                     {
                         try
