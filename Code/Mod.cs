@@ -59,6 +59,13 @@ namespace FiveTwentyNineTiles
             // Apply harmony patches.
             new Patcher("algernon-529Tiles", Log);
 
+            // Don't do anything if Harmony patches weren't applied.
+            if (Patcher.Instance is null || !Patcher.Instance.PatchesApplied)
+            {
+                Log.Critical("Harmony patches not applied; aborting system activation");
+                return;
+            }
+
             // Register mod settings to game options UI.
             ActiveSettings = new (this);
             ActiveSettings.RegisterInOptionsUI();
@@ -79,6 +86,7 @@ namespace FiveTwentyNineTiles
         public void OnDispose()
         {
             Log.Info("disposing");
+            Instance = null;
 
             // Revert harmony patches.
             Patcher.Instance?.UnPatchAll();
