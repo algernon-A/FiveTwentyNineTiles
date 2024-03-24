@@ -54,6 +54,16 @@
 
 	<Target Name="SetDescription" BeforeTargets="BeforeBuild">
 		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$([System.IO.File]::ReadAllText($(ProjectDir)/Properties/LongDescription.md))" Query="//LongDescription" />
-		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$([System.IO.File]::ReadAllText($(ProjectDir)/CHANGELOG.md))" Query="//ChangeLog" />
+		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$([System.IO.File]::ReadAllText($(ProjectDir)/Properties/LatestChangelog.md))" Query="//ChangeLog" />
+		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$(Version)" Query="//ModVersion/@Value" />
 	</Target>
+
+	<Target Name="Cleanup" AfterTargets="AfterBuild">
+		<ItemGroup>
+			<CleanTargets Include="$(DeployDir)/$(ProjectName).xml" />
+			<CleanTargets Include="$(DeployDir)/*.pdb" />
+		</ItemGroup>
+		<Delete Files="@(CleanTargets)" />
+	</Target>
+
 </Project>

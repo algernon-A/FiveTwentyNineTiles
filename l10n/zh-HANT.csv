@@ -12,5 +12,5 @@
 "Options.OPTION:ResetModSettings"	"您確定要重置 529 Tiles 的設定嗎？此動作無法撤回。"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"將 529 Tiles 的設定重置為預設值。"
 "Options.WARNING:ResetModSettings"	"您確定要重置 529 Tiles 的設定嗎？此動作無法撤回。"
-"Options.OPTION:RelockAllTiles"	"Re-lock all tiles"
+"Options.OPTION:RelockAllTiles"	"重新解鎖所有地塊"
 "Options.OPTION_DESCRIPTION:RelockAllTiles"	"將所有已解鎖地塊重新上鎖，接著您可以再次解鎖直至可使用的上限地塊數"

@@ -12,5 +12,5 @@
 "Options.OPTION:ResetModSettings"	"重置为默认设置"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"重置 529 Tiles 模组的设置为默认值。"
 "Options.WARNING:ResetModSettings"	"确定要重置 529 Tiles 模组的设置吗？此操作无法撤销。"
-"Options.OPTION:RelockAllTiles"	"Re-lock all tiles"
+"Options.OPTION:RelockAllTiles"	"重新锁定所有已解锁的地块"
 "Options.OPTION_DESCRIPTION:RelockAllTiles"	"重新锁定所有已解锁的地块，之后，您可以重新购买这些地块。"
