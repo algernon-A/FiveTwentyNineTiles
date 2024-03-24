@@ -6,7 +6,7 @@
 		<Authors>algernon</Authors>
 		<Copyright>Copyright © 2023-24 algernon (github.com/algernon-A). All rights reserved.</Copyright>
 		<Product>$(Title)</Product>
-		<Version>0.9.2</Version>
+		<Version>1.0</Version>
 		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<TargetFramework>net472</TargetFramework>
@@ -42,12 +42,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="l10n\da-DK.csv" />
 		<EmbeddedResource Include="l10n\de-DE.csv" />
 		<EmbeddedResource Include="l10n\en-US.csv" />
 		<EmbeddedResource Include="l10n\es-ES.csv" />
 		<EmbeddedResource Include="l10n\ja-JP.csv" />
 		<EmbeddedResource Include="l10n\ko-KR.csv" />
+		<EmbeddedResource Include="l10n\nl-NL.csv" />
+		<EmbeddedResource Include="l10n\pl-PL.csv" />
+		<EmbeddedResource Include="l10n\ro-RO.csv" />
 		<EmbeddedResource Include="l10n\ru-RU.csv" />
+		<EmbeddedResource Include="l10n\tr-TR.csv" />
 		<EmbeddedResource Include="l10n\zh-HANS.csv" />
 		<EmbeddedResource Include="l10n\zh-HANT.csv" />
 	</ItemGroup>

@@ -33,11 +33,10 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/529TilesOptions.png" />
   <Tag Value="Code Mod" />
   <ForumLink Value="" />
-  <ModVersion Value="0.9.2" />
-  <GameVersion Value="1.0.*" />
+  <ModVersion Value="1.0" />
+  <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog>### 0.9.2
-- Update Harmony to 2.3.1.1</ChangeLog>
+  <ChangeLog>Release version.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
   <ExternalLink Type="discord" Url="https://discord.gg/7rTsfUdfTf" />
 </Publish>
