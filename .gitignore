@@ -184,7 +184,7 @@ publish/
 *.azurePubxml
 # Note: Comment the next line if you want to checkin your web deploy settings,
 # but database connection strings (with potential passwords) will be unencrypted
-# *.pubxml
+*.pubxml
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
@@ -362,6 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Library
-/Properties/PublishProfiles/PublishNewMod.pubxml
-/Properties/PublishProfiles/PublishNewVersion.pubxml
-/Properties/PublishProfiles/UpdatePublishedConfiguration.pubxml
+/Properties/PublishProfiles
