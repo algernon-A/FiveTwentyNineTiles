@@ -38,10 +38,14 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/AllUnlockedOverview.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="" />
-  <ModVersion Value="1.0" />
+  <ModVersion Value="1.0.0.1" />
   <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog>Release version.</ChangeLog>
+  <ChangeLog>### 1.0.0.1
+- Downgrade Harmony to 2.2.2 to keep TDW happy.
+
+### 1.0
+Release version.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>
