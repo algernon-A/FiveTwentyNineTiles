@@ -20,6 +20,7 @@ The options to choose your own starting tiles or re-lock tiles is only available
 ### Safe to remove at any time
 This mod is not required to load any saves made with it. Saves made with this mod *will* work fine without it (any unlocked tiles will remain unlocked, even if you don't have this mod). Obviously, without it you're back to a 441 tile maximum (except for any that you've already unlocked).
 
+## Meta
 ### Translations
 This mod supports localization. Please help out with translating this mod into different languages via the CrowdIn site at crowdin.com/project/592-tiles .
 
