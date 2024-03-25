@@ -1,3 +1,4 @@
+## 529 Tiles
 Enables access to all 529 map tiles, with a choice of one of four methods:
 - **Unlock all tiles:** automatically and immediately unlocks all tiles on the map when you start a new city (or load an existing one). Quite straightforward.
 - **Provide extra tiles at start:** adds 88 immediately-available tile unlocks when you first start a new city (all milestones will add their usual amount of tile unlocks on top of this); this enables flexibility with your initial start.
