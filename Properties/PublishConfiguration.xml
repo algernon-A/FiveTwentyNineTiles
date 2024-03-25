@@ -30,7 +30,10 @@ This mod supports localization. Please help out with translating this mod into d
 ### Modders
 Modders (and aspiring modders!), as always I'm available and happy to chat about what I've done and answer any questions, and also about how you can implement anything that I've done for your own mods. Come grab me on the Cities: Skylines Modding Discord!</LongDescription>
   <Thumbnail Value="Properties/Thumbnail.png" />
-  <Screenshot Value="Properties/529TilesOptions.png" />
+  <Screenshot Value="Properties/Thumbnail.png" />
+  <Screenshot Value="Properties/Screenshots/529TilesOptions.jpg" />
+  <Screenshot Value="Properties/Screenshots/AllUnlocked.jpg" />
+  <Screenshot Value="Properties/Screenshots/AllUnlockedOverview.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="" />
   <ModVersion Value="1.0" />
@@ -38,5 +41,5 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Dependency Id="" DisplayName="" Version="" />
   <ChangeLog>Release version.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
-  <ExternalLink Type="discord" Url="https://discord.gg/7rTsfUdfTf" />
+  <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
 </Publish>
