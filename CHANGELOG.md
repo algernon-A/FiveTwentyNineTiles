@@ -1,3 +1,6 @@
+### 1.0.1
+- Update translations.
+
 ### 1.0.0.1
 - Downgrade Harmony to 2.2.2 to keep TDW happy.
 
