@@ -12,5 +12,5 @@
 "Options.OPTION:ResetModSettings"	"Auf Standard zur"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"Setzt alle 529 Tiles Mod-Einstellungen auf Standardwerte zur"
 "Options.WARNING:ResetModSettings"	"Alle 529 Tiles Einstellungen auf Standard zur"
-"Options.OPTION:RelockAllTiles"	"Re-lock all tiles"
+"Options.OPTION:RelockAllTiles"	"Alle Bereiche wieder sperren"
 "Options.OPTION_DESCRIPTION:RelockAllTiles"	"Sperrt alle freigeschalteten Spielbereiche wieder; du kannst die Bereiche sofort bis zu dem von dir verdienten Limit wieder kaufen."

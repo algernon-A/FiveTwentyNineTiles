@@ -63,6 +63,13 @@
 		<XmlPoke XmlInputPath="$(PublishConfigurationPath)" Value="$(Version)" Query="//ModVersion/@Value" />
 	</Target>
 
+	<Target Name="Notice" AfterTargets="AfterBuild">
+		<ItemGroup>
+			<NoticeFiles Include="$(ProjectDir)/NOTICE.txt" />
+		</ItemGroup>
+		<Copy SourceFiles="@(NoticeFiles)" DestinationFolder="$(DeployDir)" />
+	</Target>
+	
 	<Target Name="Cleanup" AfterTargets="AfterBuild">
 		<ItemGroup>
 			<CleanTargets Include="$(DeployDir)/$(ProjectName).xml" />

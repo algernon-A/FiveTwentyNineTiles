@@ -9,7 +9,7 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"將額外的地塊分配給每個等級的里程碑"
 "Options.OPTION:NoStartingTiles"	"啟用此選項後，開始新遊戲時不會自動解鎖起始地塊，而是可以由您自由選擇起始地塊（前９個地塊都能免費購買）"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"啟用此選項後，開始新遊戲時不會自動解鎖起始地塊，而是可以由您自由選擇起始地塊（前９個地塊都能免費購買）"
-"Options.OPTION:ResetModSettings"	"您確定要重置 529 Tiles 的設定嗎？此動作無法撤回。"
+"Options.OPTION:ResetModSettings"	"重設為預設值"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"將 529 Tiles 的設定重置為預設值。"
 "Options.WARNING:ResetModSettings"	"您確定要重置 529 Tiles 的設定嗎？此動作無法撤回。"
 "Options.OPTION:RelockAllTiles"	"重新解鎖所有地塊"
