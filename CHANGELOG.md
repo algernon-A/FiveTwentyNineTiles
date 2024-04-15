@@ -1,3 +1,6 @@
+### 1.0.1.1
+- Fix German translation.
+
 ### 1.0.1
 - Update translations.
 

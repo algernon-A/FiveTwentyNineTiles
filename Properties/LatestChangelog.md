@@ -1,1 +1,1 @@
-﻿- Update translations.
+﻿- Fix German translation.
