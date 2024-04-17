@@ -16,6 +16,7 @@ namespace FiveTwentyNineTiles
     using Game.Serialization;
     using Unity.Collections;
     using Unity.Entities;
+    using Unity.Mathematics;
 
     /// <summary>
     /// The 529 tile mod system.
@@ -52,6 +53,10 @@ namespace FiveTwentyNineTiles
                 EntityManager.AddComponent<Deleted>(entity);
             }
 
+            int totalTiles = _lockedMapTileQuery.CalculateEntityCount() + _unlockedMapTileQuery.CalculateEntityCount();
+            int extraTiles = totalTiles - 441;
+            _log.Info($"{totalTiles} total map tiles detected");
+
             // Unlock all tiles, if that's what we're doing.
             if (Mod.Instance.ActiveSettings.UnlockAll)
             {
@@ -72,7 +77,7 @@ namespace FiveTwentyNineTiles
 
                 // Create new milestone entity with initial unlocked tile count.
                 Entity extraMilestone = EntityManager.CreateEntity();
-                EntityManager.AddComponentData(extraMilestone, new MilestoneData { m_MapTiles = 88 });
+                EntityManager.AddComponentData(extraMilestone, new MilestoneData { m_MapTiles = extraTiles });
                 EntityManager.AddComponentData(extraMilestone, new CustomMilestone { });
             }
 
@@ -87,7 +92,7 @@ namespace FiveTwentyNineTiles
                     // Final milestone has index of 20.
                     if (EntityManager.TryGetComponent(entity, out MilestoneData milestone) && milestone.m_Index == 20)
                     {
-                        milestone.m_MapTiles += 88;
+                        milestone.m_MapTiles += extraTiles;
                         EntityManager.SetComponentData(entity, milestone);
 
                         // All done here.
@@ -105,7 +110,7 @@ namespace FiveTwentyNineTiles
                 {
                     if (EntityManager.TryGetComponent(entity, out MilestoneData milestone))
                     {
-                        UpdateMilestone(ref milestone);
+                        UpdateMilestone(ref milestone, totalTiles);
                         EntityManager.SetComponentData(entity, milestone);
                     }
                 }
@@ -181,7 +186,8 @@ namespace FiveTwentyNineTiles
         /// Updates a given milestone to increase the number of unlockable map tiles.
         /// </summary>
         /// <param name="milestone">Milestone to alter.</param>
-        private void UpdateMilestone(ref MilestoneData milestone)
+        /// <param name="totalTitles">Total map tiles available.</param>
+        private void UpdateMilestone(ref MilestoneData milestone, int totalTitles)
         {
             switch (milestone.m_Index)
             {
@@ -243,7 +249,9 @@ namespace FiveTwentyNineTiles
                     milestone.m_MapTiles = 61;
                     break;
                 case 20:
-                    milestone.m_MapTiles = 68;
+                    // Allocate remaining tiles (68 for 529).
+                    int remainingTiles = totalTitles - 461;
+                    milestone.m_MapTiles = math.max(0, remainingTiles);
                     break;
             }
         }

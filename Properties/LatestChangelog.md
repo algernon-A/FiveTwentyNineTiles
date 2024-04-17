@@ -1,1 +1,1 @@
-﻿- Fix German translation.
+﻿- Add support for maps with more than 529 tiles.
