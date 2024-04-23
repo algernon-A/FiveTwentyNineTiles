@@ -1,3 +1,4 @@
+### 1.1
 - Add support for maps with more than 529 tiles.
 
 ### 1.0.1.2

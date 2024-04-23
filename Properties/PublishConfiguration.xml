@@ -43,7 +43,7 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/AllUnlockedOverview.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/529-tiles.1644735/" />
-  <ModVersion Value="1.0.99" />
+  <ModVersion Value="1.1" />
   <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
   <ChangeLog>- Add support for maps with more than 529 tiles.</ChangeLog>
