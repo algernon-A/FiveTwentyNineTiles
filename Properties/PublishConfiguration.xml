@@ -49,4 +49,6 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <ChangeLog>- Add support for maps with more than 529 tiles.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
+  <ExternalLink Type="crowdin" Url="https://crowdin.com/project/592-tiles" />
+  <ExternalLink Type="ko-fi" Url="https://ko-fi.com/algernon" />
 </Publish>
