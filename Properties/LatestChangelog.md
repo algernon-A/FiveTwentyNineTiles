@@ -1,1 +1,1 @@
-﻿- Add support for maps with more than 529 tiles.
+﻿- Update translations.

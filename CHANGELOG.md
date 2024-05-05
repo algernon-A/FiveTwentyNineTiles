@@ -1,3 +1,6 @@
+### 1.1.1
+- Update translations.
+
 ### 1.1
 - Add support for maps with more than 529 tiles.
 
