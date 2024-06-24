@@ -1,2 +1,1 @@
-﻿- Compatibility with game version 1.1.5.
-- Add tile upkeep cost multiplier.
+﻿- Fix tile upkeep setting changes sometimes not saving correctly in some cases.

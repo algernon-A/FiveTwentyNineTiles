@@ -22,6 +22,7 @@ namespace FiveTwentyNineTiles
         private bool _extraAtStart = false;
         private bool _extraAtEnd = false;
         private bool _milestones = false;
+        private float _upkeepModifier = 1f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ModSettings"/> class.
@@ -43,9 +44,6 @@ namespace FiveTwentyNineTiles
             set
             {
                 _unlockAll = value;
-
-                // Assign contra value to ensure that JSON contains at least one non-default value.
-                Contra = value;
 
                 // Clear conflicting settings.
                 if (value)
@@ -156,17 +154,13 @@ namespace FiveTwentyNineTiles
         [SettingsUISection("Upkeep")]
         public float UpkeepMultiplier
         {
-            get => MapTilePurchaseSystemPatches.UpkeepModifier;
-            set => MapTilePurchaseSystemPatches.UpkeepModifier = value;
+            get => _upkeepModifier;
+            set
+            {
+                _upkeepModifier = value;
+                MapTilePurchaseSystemPatches.UpkeepModifier = value;
+            }
         }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether, well, nothing really.
-        /// This is just the inverse of <see cref="UnlockAll"/>, to ensure the the JSON contains at least one non-default value.
-        /// This is to workaround a bug where the settings file isn't overwritten when there are no non-default settings.
-        /// </summary>
-        [SettingsUIHidden]
-        public bool Contra { get; set; } = false;
 
         /// <summary>
         /// Sets a value indicating whether the mod's settings should be reset.
@@ -181,9 +175,6 @@ namespace FiveTwentyNineTiles
             {
                 // Apply defaults.
                 SetDefaults();
-
-                // Ensure contra is set correctly.
-                Contra = UnlockAll;
 
                 // Save.
                 ApplyAndSave();
@@ -202,6 +193,7 @@ namespace FiveTwentyNineTiles
 
             RelockAllTiles = false;
             NoStartingTiles = false;
+            UpkeepMultiplier = 1f;
         }
 
         /// <summary>

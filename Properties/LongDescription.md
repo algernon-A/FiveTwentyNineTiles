@@ -22,14 +22,15 @@ When purchasing tiles, the price of the final map tiles after the 441st will be 
 
 The options to choose your own starting tiles or re-lock tiles is only available if 'unlock all tiles' is not selected.  When this option is selected any new maps will start with zero existing unlocked tiles, so you can choose and unlock your own starting tiles normally (if using this option the first nine tile unlocks are free).
 
+### Tile upkeep
 Tile upkeep costs can be changed using the multiplier slider, ranging from 0% (disable upkeep entirely) to 200% (double the upkeep costs compared to the base game).
 
+## Meta
 ### Safe to remove at any time
 This mod is not required to load any saves made with it. Saves made with this mod *will* work fine without it (any unlocked tiles will remain unlocked, even if you don't have this mod). Obviously, without it you're back to a 441 tile maximum (except for any that you've already unlocked).
 
-## Meta
 ### Translations
-This mod supports localization. Please help out with translating this mod into different languages via the CrowdIn site at crowdin.com/project/592-tiles .
+This mod supports localization. Please help out with translating this mod into different languages via the CrowdIn site (link on right)!
 
 ### Credits
 This mod uses the Harmony patching library by Andreas Pardeike.
