@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"Allocates the additional tile unlocks across all regular game milestones, in proportion to the normal amount for each milestone."
 "Options.OPTION:NoStartingTiles"	"開始時のタイルを選択する"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"これが選択されている場合、新規ゲーム開始時に自動で初期タイルをアンロックしません。代わりに、自分自身で初期タイルを選択することができます(最初の9枚のタイルは無償で得られます)。"
+"Options.OPTION:UpkeepMultiplier"	"Tile upkeep multiplier"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"The game's default tile upkeep cost will be multiplied by this percentage.  Set this to zero to completely disable tile upkeep."
 "Options.OPTION:ResetModSettings"	"初期設定に戻す"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"529タイルModの設定を初期化します。"
 "Options.WARNING:ResetModSettings"	"このModのすべての設定を初期化しますか？元に戻すことはできません。"

@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"Allocates the additional tile unlocks across all regular game milestones, in proportion to the normal amount for each milestone."
 "Options.OPTION:NoStartingTiles"	"Vælg startfelter"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"Hvis dette er valgt, vil der ikke automatisk blive tildelt startfelter, når du starter et nyt spil. Du kan i stedet vælge dine egne startfelter (de første ni felter vil være gratis)."
+"Options.OPTION:UpkeepMultiplier"	"Tile upkeep multiplier"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"The game's default tile upkeep cost will be multiplied by this percentage.  Set this to zero to completely disable tile upkeep."
 "Options.OPTION:ResetModSettings"	"Nulstil til standardindstillinger"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"Nulstiller alle '529 Tiles' indstillinger til standard."
 "Options.WARNING:ResetModSettings"	"Vil du nulstille alle '529 Tiles' indstillinger til standard? Dette kan ikke fortrydes."

@@ -10,6 +10,7 @@ namespace FiveTwentyNineTiles
     using Colossal.IO.AssetDatabase;
     using Game.Modding;
     using Game.Settings;
+    using Game.UI;
 
     /// <summary>
     /// The mod's settings.
@@ -147,6 +148,17 @@ namespace FiveTwentyNineTiles
         [SettingsUIHideByCondition(typeof(ModSettings), nameof(StartingTilesHidden))]
         [SettingsUISection("StartingOptions")]
         public bool RelockAllTiles { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the tile upkeep multiplier.
+        /// </summary>
+        [SettingsUISlider(min = 0f, max = 200f, step = 5f, scalarMultiplier = 100f, unit = Unit.kPercentage)]
+        [SettingsUISection("Upkeep")]
+        public float UpkeepMultiplier
+        {
+            get => MapTilePurchaseSystemPatches.UpkeepModifier;
+            set => MapTilePurchaseSystemPatches.UpkeepModifier = value;
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether, well, nothing really.

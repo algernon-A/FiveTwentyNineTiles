@@ -18,17 +18,29 @@ namespace FiveTwentyNineTiles
     /// Harmony patches for <see cref="MapTilePurchaseSystem"/> to implement per-tile cost limits.
     /// </summary>
     [HarmonyPatch(typeof(MapTilePurchaseSystem))]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1313:Parameter names should begin with lower-case letter", Justification = "Harmony patching syntax")]
     internal static class MapTilePurchaseSystemPatches
     {
+        private static float _upkeepModifier = 1f;
+
         /// <summary>
-        /// Harmony transpiler for <c>MapTilePurchaseSystem.UpdateStatus</c> to cap the cost for new tiles beyond 441.
+        /// Gets or sets the tile upkeep modifier to apply.
+        /// </summary>
+        internal static float UpkeepModifier
+        {
+            get => _upkeepModifier;
+            set => _upkeepModifier = value;
+        }
+
+        /// <summary>
+        /// Harmony transpiler for <c>MapTilePurchaseSystem.UpdateStatus</c> to cap the cost for tiles beyond 441 and to update the displayed tile purchase upkeep cost.
         /// </summary>
         /// <param name="instructions">Original ILCode.</param>
         /// <param name="original">Method being patched.</param>
         /// <returns>Modified ILCode.</returns>
         [HarmonyPatch("UpdateStatus")]
         [HarmonyTranspiler]
-        public static IEnumerable<CodeInstruction> UpdateStatusTranspiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
+        internal static IEnumerable<CodeInstruction> UpdateStatusTranspiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
         {
             Mod.Instance.Log.Info("transpiling " + original.DeclaringType + '.' + original.Name);
 
@@ -36,35 +48,24 @@ namespace FiveTwentyNineTiles
             FieldInfo m_Cost = AccessTools.Field(typeof(MapTilePurchaseSystem), "m_Cost");
             bool firstCost = false;
 
+            // Tile upkeep cost field (used for UI display).
+            FieldInfo m_Upkeep = AccessTools.Field(typeof(MapTilePurchaseSystem), "m_Upkeep");
+
             // Parse instructions.
             IEnumerator<CodeInstruction> instructionEnumerator = instructions.GetEnumerator();
             while (instructionEnumerator.MoveNext())
             {
                 CodeInstruction instruction = instructionEnumerator.Current;
 
-                // Look for ldloc.s 5 followed by add (only instance in target).
-                if (instruction.opcode == OpCodes.Ldloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 5)
+                // Override number of owned tiles - stored as local var 7 (to cap tile cost scaling).
+                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 7)
                 {
-                    Mod.Instance.Log.Debug("found ldloc.s 5");
-                    yield return instruction;
-
-                    // Check for following add.
-                    instructionEnumerator.MoveNext();
-                    instruction = instructionEnumerator.Current;
-                    if (instruction.opcode == OpCodes.Add)
-                    {
-                        Mod.Instance.Log.Debug("found add");
-                        yield return instruction;
-
-                        // Insert call to math.min(x, 441).
-                        yield return new CodeInstruction(OpCodes.Ldc_I4, 441);
-                        yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(math), nameof(math.min), new Type[] { typeof(int), typeof(int) }));
-
-                        continue;
-                    }
+                    // Insert call to math.min(x, 441).
+                    yield return new CodeInstruction(OpCodes.Ldc_I4, 441);
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(math), nameof(math.min), new Type[] { typeof(int), typeof(int) }));
                 }
 
-                // Otherwise, looking for second store to MapTilePurchaseSystem.m_Cost.
+                // Otherwise, looking for second store to MapTilePurchaseSystem.m_Cost (to make first nine tiles free).
                 else if (instruction.StoresField(m_Cost))
                 {
                     if (!firstCost)
@@ -75,14 +76,33 @@ namespace FiveTwentyNineTiles
                     {
                         // Insert call to our custom method.
                         Mod.Instance.Log.Debug("found second m_Cost store");
-                        yield return new CodeInstruction(OpCodes.Ldloc_S, 5);
-                        yield return new CodeInstruction(OpCodes.Ldloc_S, 6);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 22);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 7);
                         yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MapTilePurchaseSystemPatches), nameof(CheckFreeTiles)));
                     }
                 }
 
+                // Otherwise, looking for the store to m_Upkeep - need to change this with our multiplier to ensure the UI is in sync with the updated upkeep.
+                else if (instruction.StoresField(m_Upkeep))
+                {
+                    // Multiply calculated value by our multiplier.
+                    yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(MapTilePurchaseSystemPatches), nameof(_upkeepModifier)));
+                    yield return new CodeInstruction(OpCodes.Mul);
+                }
+
                 yield return instruction;
             }
+        }
+
+        /// <summary>
+        /// Harmony postfix for <see cref="MapTilePurchaseSystem.CalculateOwnedTilesUpkeep"/> to apply custom tile upkeep multipliers.
+        /// </summary>
+        /// <param name="__result">Original method result.</param>
+        [HarmonyPatch(nameof(MapTilePurchaseSystem.CalculateOwnedTilesUpkeep))]
+        [HarmonyPostfix]
+        internal static void GetMapTileUpkeepCostMultiplierPostfix(ref int __result)
+        {
+            __result = (int)(__result * UpkeepModifier);
         }
 
         /// <summary>
@@ -95,7 +115,7 @@ namespace FiveTwentyNineTiles
         private static float CheckFreeTiles(float cost, int numTiles, int ownedTiles)
         {
             // Check tile count.
-            if (numTiles + ownedTiles <= 9)
+            if (numTiles + ownedTiles < 9)
             {
                 // First nine tiles - return free tile.
                 return 0f;

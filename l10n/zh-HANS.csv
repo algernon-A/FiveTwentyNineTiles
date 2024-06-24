@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"将额外的地块分配给每个等级的里程碑，分配的数量与原版每个等级可解锁的数量成正比。"
 "Options.OPTION:NoStartingTiles"	"选择起始地块"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"如果勾选此选项，在开始新游戏时不会自动解锁起始地块。相反，您可以自己选择起始地块（前九个地块为免费购买）。"
+"Options.OPTION:UpkeepMultiplier"	"地块维护费乘数"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"游戏默认的地块维护费将乘以该百分比数值。将其设置为零可以完全禁用地块维护费。"
 "Options.OPTION:ResetModSettings"	"重置为默认设置"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"重置 529 Tiles 模组的设置为默认值。"
 "Options.WARNING:ResetModSettings"	"确定要重置 529 Tiles 模组的设置吗？此操作无法撤销。"

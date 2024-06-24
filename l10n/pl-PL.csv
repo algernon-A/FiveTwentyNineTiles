@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"Przydziela dodatkowe pola do wszystkich kamieni milowych, proporcjonalnie do normalnej liczby dla każdego kamienia milowego."
 "Options.OPTION:NoStartingTiles"	"Wybierz początkowe pola"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"Jeśli ta opcja jest zaznaczona, żadne pola nie będą odblokowane po uruchomieniu nowej gry. Zamiast tego możesz wybrać własny obszar startowy (pierwsze 9 pól będzie darmowych)."
+"Options.OPTION:UpkeepMultiplier"	"Mnożnik utrzymania pola"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"Domyślny koszt utrzymania pola mapy zostanie pomnożony przez ten procent. Ustaw to na zero, aby całkowicie wyłączyć utrzymanie pola."
 "Options.OPTION:ResetModSettings"	"Przywróć ustawienia domyślne"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"Resetuje wszystkie ustawienia modyfikacji 529 Tiles do wartości domyślnych."
 "Options.WARNING:ResetModSettings"	"Przywrócić ustawienia moda 529 Tiles do ustawień domyślnych? Tej czynności nie można cofnąć."

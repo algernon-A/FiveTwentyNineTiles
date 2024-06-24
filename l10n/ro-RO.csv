@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"Alocă deblocări de sectoare adiționale la toate etapele obișnuite ale jocului, proporțional cu valoarea normală pentru fiecare etapă."
 "Options.OPTION:NoStartingTiles"	"Selectează sectoarele inițiale de la început"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"Dacă această opțiune este selectată, atunci niciun sector de la început nu va fi deblocat automat la începerea unui joc nou. În schimb, poți alege individual sectoarele de început (primele nouă sectoare vor putea fi achiziționate gratuit)."
+"Options.OPTION:UpkeepMultiplier"	"Multiplicator pentru costul de întreținere al sectoarelor"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"Costul implicit de întreținere al sectoarelor va fi înmulțit cu acest procent. Setează această valoare pe zero pentru a dezactiva complet costul de întreținere al sectoarelor."
 "Options.OPTION:ResetModSettings"	"Resetează la valorile implicite"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"Resetează toate setările mod-ului 529 Sectoare la valorile implicite."
 "Options.WARNING:ResetModSettings"	"Resetezi toate setările mod-ului 529 Sectoare la valorile implicite? Această acțiune nu poate fi anulată."

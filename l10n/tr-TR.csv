@@ -9,6 +9,8 @@
 "Options.OPTION_DESCRIPTION:AssignToMilestones"	"Allocates the additional tile unlocks across all regular game milestones, in proportion to the normal amount for each milestone."
 "Options.OPTION:NoStartingTiles"	"Select initial starting tiles"
 "Options.OPTION_DESCRIPTION:NoStartingTiles"	"If this is selected then no starting tiles will be automatically unlocked when starting a new game. Instead you can choose your own starting tiles (the first nine tiles will be free to purchase)."
+"Options.OPTION:UpkeepMultiplier"	"Tile upkeep multiplier"
+"Options.OPTION_DESCRIPTION:UpkeepMultiplier"	"The game's default tile upkeep cost will be multiplied by this percentage.  Set this to zero to completely disable tile upkeep."
 "Options.OPTION:ResetModSettings"	"Reset to default"
 "Options.OPTION_DESCRIPTION:ResetModSettings"	"Resets all 529 Tiles mod settings to default."
 "Options.WARNING:ResetModSettings"	"Reset all 529 Tiles settings to default?  This cannot be undone."

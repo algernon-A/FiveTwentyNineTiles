@@ -11,6 +11,8 @@ There are also two options for **locking** tiles (these are only available if if
 - Optional **custom selection of starting tiles**, which enables you to choose your own nine starting tiles (at no cost) when starting a new map.
 - Optional **re-locking of all currently unlocked tiles**, if you want to change your mind about which tiles you purchased.  Note that this will lock **all** map tiles and you will need to chose which tiles to unlock.
 
+You can also **change tile upkeep costs**, increasing or decreasing tile upkeep (including reducing the upkeep cost to zero).
+
 ## Instructions
 Install the mod, load to the main menu, and go to 'Settings'. There will be a mod setting entry there for '529 Tiles' where you can choose the unlock mode (see above) that you want.
 
@@ -19,6 +21,8 @@ The selected unlock mode will be automatically applied to any new game started o
 When purchasing tiles, the price of the final map tiles after the 441st will be locked (so the price won't keep on increasing for each tile beyond the vanilla game maximum).
 
 The options to choose your own starting tiles or re-lock tiles is only available if 'unlock all tiles' is not selected.  When this option is selected any new maps will start with zero existing unlocked tiles, so you can choose and unlock your own starting tiles normally (if using this option the first nine tile unlocks are free).
+
+Tile upkeep costs can be changed using the multiplier slider, ranging from 0% (disable upkeep entirely) to 200% (double the upkeep costs compared to the base game).
 
 ### Safe to remove at any time
 This mod is not required to load any saves made with it. Saves made with this mod *will* work fine without it (any unlocked tiles will remain unlocked, even if you don't have this mod). Obviously, without it you're back to a 441 tile maximum (except for any that you've already unlocked).
