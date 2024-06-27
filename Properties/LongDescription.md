@@ -9,7 +9,7 @@ This mod offers a choice of one of four methods to access these tiles:
 
 There are also two options for **locking** tiles (these are only available if if 'Unlock all tiles' is not selected):
 - Optional **custom selection of starting tiles**, which enables you to choose your own nine starting tiles (at no cost) when starting a new map.
-- Optional **re-locking of all currently unlocked tiles**, if you want to change your mind about which tiles you purchased.  Note that this will lock **all** map tiles and you will need to chose which tiles to unlock.
+- Optional **re-locking of all currently unlocked tiles**, if you want to change your mind about which tiles you purchased.  Note that this will lock **all** map tiles and you will need to chose which tiles to unlock.  **This option is not available if 'Unlock all tiles' is selected**, because (quite obviously) they conflict.
 
 You can also **change tile upkeep costs**, increasing or decreasing tile upkeep (including reducing the upkeep cost to zero).
 
@@ -20,7 +20,15 @@ The selected unlock mode will be automatically applied to any new game started o
 
 When purchasing tiles, the price of the final map tiles after the 441st will be locked (so the price won't keep on increasing for each tile beyond the vanilla game maximum).
 
-The options to choose your own starting tiles or re-lock tiles is only available if 'unlock all tiles' is not selected.  When this option is selected any new maps will start with zero existing unlocked tiles, so you can choose and unlock your own starting tiles normally (if using this option the first nine tile unlocks are free).
+### Choosing your own starting tiles
+**The option to choose your own starting tiles is only available if 'unlock all tiles' is not selected**, because (obviously) these two settings inherently conflict with each other; if you want to choose your own starting tiles you'll need to choose a different unlocking option.
+
+When this option is any city you load will have all its tiles (re)-locked, so you can choose which ones to unlock again and leave the rest locked (if using this option the first nine tile unlocks are free).
+
+### Re-locking tiles
+**The option to re-lock tiles is only available if 'unlock all tiles' is not selected**, because (obviously) these two settings inherently conflict with each other; if you want to re-lock tiles you'll need to choose a different unlocking option.
+
+When this option is selected any new maps will start with zero existing unlocked tiles, so you can choose and unlock your own starting tiles normally (if using this option the first nine tile unlocks are free).
 
 ### Tile upkeep
 Tile upkeep costs can be changed using the multiplier slider, ranging from 0% (disable upkeep entirely) to 200% (double the upkeep costs compared to the base game).
