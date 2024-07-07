@@ -1,1 +1,1 @@
-﻿- Updates for game version 1.1.7.
+﻿- Rebuild game's starting tile array when selecting custom starting tiles.
