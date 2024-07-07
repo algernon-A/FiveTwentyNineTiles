@@ -12,6 +12,7 @@ namespace FiveTwentyNineTiles
     using System.Reflection.Emit;
     using Game.Simulation;
     using HarmonyLib;
+    using Unity.Entities;
     using Unity.Mathematics;
 
     /// <summary>
@@ -92,6 +93,19 @@ namespace FiveTwentyNineTiles
 
                 yield return instruction;
             }
+        }
+
+        /// <summary>
+        /// Harmony postfix for <see cref="MapTilePurchaseSystem.UnlockTile"/> to adjust for selection of custom starting tiles.
+        /// </summary>
+        /// <param name="entityManager">EntityManager instance.</param>
+        /// <param name="area">Tile being unlocked.</param>
+        [HarmonyPatch(nameof(MapTilePurchaseSystem.UnlockTile))]
+        [HarmonyPostfix]
+        internal static void UnlockTilePostfix(EntityManager entityManager, Entity area)
+        {
+            // Add via the active FiveTwentyNineSystem instance.
+            entityManager.World.GetOrCreateSystemManaged<FiveTwentyNineSystem>().AddStartingTile(area);
         }
 
         /// <summary>

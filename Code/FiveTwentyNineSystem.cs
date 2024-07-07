@@ -6,6 +6,7 @@
 
 namespace FiveTwentyNineTiles
 {
+    using System.Reflection;
     using Colossal.Entities;
     using Colossal.Logging;
     using Colossal.Serialization.Entities;
@@ -15,6 +16,7 @@ namespace FiveTwentyNineTiles
     using Game.Prefabs;
     using Game.Serialization;
     using Game.Simulation;
+    using HarmonyLib;
     using Unity.Collections;
     using Unity.Entities;
     using Unity.Mathematics;
@@ -41,6 +43,9 @@ namespace FiveTwentyNineTiles
         // Query to find our custom milestone component.
         private EntityQuery _customMilestoneQuery;
 
+        // Game's list of starting tiles.
+        private NativeList<Entity> _startingTiles;
+
         /// <summary>
         /// Called by the game in post-deserialization.
         /// </summary>
@@ -52,6 +57,16 @@ namespace FiveTwentyNineTiles
             {
                 _log.Info("removing start bonus");
                 EntityManager.AddComponent<Deleted>(entity);
+            }
+
+            // Reflect game's starting tiles list.
+            if (World.GetOrCreateSystemManaged<MapTileSystem>() is MapTileSystem mapTileSystem && AccessTools.Field(typeof(MapTileSystem), "m_StartTiles") is FieldInfo startTilesField)
+            {
+                _startingTiles = (NativeList<Entity>)startTilesField.GetValue(mapTileSystem);
+            }
+            else
+            {
+                _log.Error("Unable to reflect MapTileSystem.m_StartTiles; total tile upkeep costs may not be correctly calculated!");
             }
 
             int totalTiles = _lockedMapTileQuery.CalculateEntityCount() + _unlockedMapTileQuery.CalculateEntityCount();
@@ -138,8 +153,28 @@ namespace FiveTwentyNineTiles
                     EntityManager.AddComponentData(tile, default(Updated));
                 }
 
+                // Clear starting tiles.
+                _startingTiles.Clear();
+
                 // Dispose of native array.
                 tiles.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Adds the given tile to the list of starting tiles, up to a maximum of nine.
+        /// </summary>
+        /// <param name="tile">Tile to add.</param>
+        internal void AddStartingTile(Entity tile)
+        {
+            if (_startingTiles.Length < 9)
+            {
+                _startingTiles.Add(tile);
+                _log.Debug($"Adding starting tile {_startingTiles.Length}");
+            }
+            else
+            {
+                _log.Debug("Not adding additional starting tile");
             }
         }
 
