@@ -1,1 +1,1 @@
-﻿- Fix tile upkeep setting changes sometimes not saving correctly in some cases.
+﻿- Updates for game version 1.1.7.

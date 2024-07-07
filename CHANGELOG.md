@@ -1,3 +1,6 @@
+### 1.2.1
+- Updates for game version 1.1.7.
+
 ### 1.2.0.1 hotfix
 - Fix tile upkeep setting changes sometimes not saving correctly in some cases.
 
