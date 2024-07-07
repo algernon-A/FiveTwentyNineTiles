@@ -14,6 +14,7 @@ namespace FiveTwentyNineTiles
     using Game.Common;
     using Game.Prefabs;
     using Game.Serialization;
+    using Game.Simulation;
     using Unity.Collections;
     using Unity.Entities;
     using Unity.Mathematics;
@@ -61,7 +62,14 @@ namespace FiveTwentyNineTiles
             if (Mod.Instance.ActiveSettings.UnlockAll)
             {
                 _log.Info("unlocking all tiles");
-                EntityManager.RemoveComponent<Native>(_lockedMapTileQuery.ToEntityArray(Allocator.Temp));
+                NativeArray<Entity> tiles = _lockedMapTileQuery.ToEntityArray(Allocator.Temp);
+                foreach (Entity tile in tiles)
+                {
+                    MapTilePurchaseSystem.UnlockTile(EntityManager, tile);
+                }
+
+                // Dispose of native array.
+                tiles.Dispose();
 
                 // All done - no point in doing anything else.
                 return;
@@ -116,23 +124,22 @@ namespace FiveTwentyNineTiles
                 }
             }
 
-            // Re-lock tiles, if that's what we're doing.
-            if (Mod.Instance.ActiveSettings.RelockAllTiles)
+            // Re-lock tiles, if that's what we're doing - either deliberately locking or choosing starting tiles.
+            if (Mod.Instance.ActiveSettings.RelockAllTiles || (context.purpose == Purpose.NewGame && Mod.Instance.ActiveSettings.NoStartingTiles))
             {
-                _log.Info("re-locking all tiles");
-                EntityManager.AddComponent<Native>(_unlockedMapTileQuery.ToEntityArray(Allocator.Temp));
-
-                return;
-            }
-
-            // Remove all unlocked tiles if this is a new game and we're starting with no unlocked tiles.
-            if (context.purpose == Purpose.NewGame && Mod.Instance.ActiveSettings.NoStartingTiles)
-            {
-                _log.Info("locking all tiles");
-
-                // Ensure purchasing feature is unlocked before locking all tiles.
+                // Unlock map tile purchasing feature.
                 EnableTilePurchasing();
-                EntityManager.AddComponent<Native>(_unlockedMapTileQuery.ToEntityArray(Allocator.Temp));
+
+                _log.Info("locking all tiles");
+                NativeArray<Entity> tiles = _unlockedMapTileQuery.ToEntityArray(Allocator.Temp);
+                foreach (Entity tile in tiles)
+                {
+                    EntityManager.AddComponent<Native>(tile);
+                    EntityManager.AddComponentData(tile, default(Updated));
+                }
+
+                // Dispose of native array.
+                tiles.Dispose();
             }
         }
 
