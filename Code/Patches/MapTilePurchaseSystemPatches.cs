@@ -122,11 +122,11 @@ namespace FiveTwentyNineTiles
         /// <summary>
         /// Checks to see if this tile is one of the first nine; if so, the cost is free.
         /// </summary>
-        /// <param name="cost">Calculated tile cost.</param>
-        /// <param name="numTiles">Number of selected tiles processed this update.</param>
         /// <param name="ownedTiles">Number of already owned tiles.</param>
+        /// <param name="numTiles">Number of selected tiles processed this update.</param>
+        /// <param name="cost">Calculated tile cost.</param>
         /// <returns>0 if this tile is one of the first nine, otherwise returns the calculated cost.</returns>
-        private static float CheckFreeTiles(float cost, int numTiles, int ownedTiles)
+        private static float CheckFreeTiles(int ownedTiles, int numTiles, float cost)
         {
             // Check tile count.
             if (numTiles + ownedTiles < 9)
