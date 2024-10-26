@@ -129,7 +129,7 @@ namespace FiveTwentyNineTiles
         private static float CheckFreeTiles(float cost, int numTiles, int ownedTiles)
         {
             // Check tile count.
-            if (numTiles + ownedTiles < 9)
+            if (numTiles + ownedTiles <= 9)
             {
                 // First nine tiles - return free tile.
                 return 0f;
