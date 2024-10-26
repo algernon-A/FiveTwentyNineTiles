@@ -77,8 +77,8 @@ namespace FiveTwentyNineTiles
                     {
                         // Insert call to our custom method.
                         Mod.Instance.Log.Debug("found second m_Cost store");
-                        yield return new CodeInstruction(OpCodes.Ldloc_S, 22);
                         yield return new CodeInstruction(OpCodes.Ldloc_S, 7);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 8);
                         yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MapTilePurchaseSystemPatches), nameof(CheckFreeTiles)));
                     }
                 }
