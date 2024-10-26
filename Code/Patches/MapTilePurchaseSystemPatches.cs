@@ -77,7 +77,7 @@ namespace FiveTwentyNineTiles
                     {
                         // Insert call to our custom method.
                         Mod.Instance.Log.Debug("found second m_Cost store");
-                        yield return new CodeInstruction(OpCodes.Ldloc_S, 22);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 8);
                         yield return new CodeInstruction(OpCodes.Ldloc_S, 7);
                         yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MapTilePurchaseSystemPatches), nameof(CheckFreeTiles)));
                     }
@@ -126,7 +126,7 @@ namespace FiveTwentyNineTiles
         /// <param name="numTiles">Number of selected tiles processed this update.</param>
         /// <param name="ownedTiles">Number of already owned tiles.</param>
         /// <returns>0 if this tile is one of the first nine, otherwise returns the calculated cost.</returns>
-        private static float CheckFreeTiles(float cost, int numTiles, int ownedTiles)
+        private static float CheckFreeTiles(int numTiles, int ownedTiles, float cost)
         {
             // Check tile count.
             if (numTiles + ownedTiles < 9)
