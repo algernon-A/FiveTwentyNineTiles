@@ -1,1 +1,1 @@
-﻿- Rebuild game's starting tile array when selecting custom starting tiles.
+﻿- Fix ILCode variable references when calculating map tile purchase status.

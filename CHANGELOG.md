@@ -1,3 +1,6 @@
+### 1.2.2.1
+- Fix ILCode variable references when calculating map tile purchase status.
+
 ### 1.2.2
 - Rebuild game's starting tile array when selecting custom starting tiles.
 

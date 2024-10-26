@@ -58,8 +58,8 @@ namespace FiveTwentyNineTiles
             {
                 CodeInstruction instruction = instructionEnumerator.Current;
 
-                // Override number of owned tiles - stored as local var 7 (to cap tile cost scaling).
-                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 7)
+                // Override number of owned tiles - stored as local var 8 (to cap tile cost scaling).
+                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand is LocalBuilder localBuilder && localBuilder.LocalIndex == 8)
                 {
                     // Insert call to math.min(x, 441).
                     yield return new CodeInstruction(OpCodes.Ldc_I4, 441);
@@ -77,8 +77,8 @@ namespace FiveTwentyNineTiles
                     {
                         // Insert call to our custom method.
                         Mod.Instance.Log.Debug("found second m_Cost store");
-                        yield return new CodeInstruction(OpCodes.Ldloc_S, 22);
                         yield return new CodeInstruction(OpCodes.Ldloc_S, 7);
+                        yield return new CodeInstruction(OpCodes.Ldloc_S, 8);
                         yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MapTilePurchaseSystemPatches), nameof(CheckFreeTiles)));
                     }
                 }
