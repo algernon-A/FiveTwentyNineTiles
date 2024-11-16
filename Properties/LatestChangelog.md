@@ -1,1 +1,1 @@
-﻿- Fix ILCode variable references when calculating map tile purchase status.
+﻿- Update translations.

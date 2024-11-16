@@ -56,12 +56,13 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/AllUnlockedOverview.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/529-tiles.1644735/" />
-  <ModVersion Value="1.2.2.1" />
+  <ModVersion Value="1.2.2.2" />
   <GameVersion Value="1.1.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog>- Fix ILCode variable references when calculating map tile purchase status.</ChangeLog>
+  <ChangeLog>- Update translations.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/592-tiles" />
   <ExternalLink Type="kofi" Url="https://ko-fi.com/algernon" />
+  <ExternalLink Type="paypal" Url="https://paypal.me/algernonCities" />
 </Publish>
