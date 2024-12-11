@@ -56,8 +56,8 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <Screenshot Value="Properties/Screenshots/AllUnlockedOverview.jpg" />
   <Tag Value="Code Mod" />
   <ForumLink Value="https://forum.paradoxplaza.com/forum/threads/529-tiles.1644735/" />
-  <ModVersion Value="1.2.2.2" />
-  <GameVersion Value="1.1.*" />
+  <ModVersion Value="1.2.2.3" />
+  <GameVersion Value="1.2.*" />
   <Dependency Id="" DisplayName="" Version="" />
   <ChangeLog>- Update translations.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
