@@ -19,6 +19,8 @@ You can also **change tile upkeep costs**, increasing or decreasing tile upkeep 
 ## Instructions
 Install the mod, load to the main menu, and go to 'Settings'. There will be a mod setting entry there for '529 Tiles' where you can choose the unlock mode (see above) that you want.
 
+**Changed in version 1.3**: by popular demand, the mod will now leave the game unchanged by default.  You must **specifically choose an unlock mode** if you want additional tile unlocks.
+
 The selected unlock mode will be automatically applied to any new game started or existing save loaded. '**Unlock all**' and '**Provide extra tiles at start**' effects are instant; there is no need to unlock the first milestone to trigger any actions.
 
 When purchasing tiles, the price of the final map tiles after the 441st will be locked (so the price won't keep on increasing for each tile beyond the vanilla game maximum).
@@ -38,7 +40,9 @@ Tile upkeep costs can be changed using the multiplier slider, ranging from 0% (d
 
 ## Meta
 ### Safe to remove at any time
-This mod is not required to load any saves made with it. Saves made with this mod *will* work fine without it (any unlocked tiles will remain unlocked, even if you don't have this mod). Obviously, without it you're back to a 441 tile maximum (except for any that you've already unlocked).
+This mod is not required to load any saves made with it. Saves made with this mod *will* work fine without it (any unlocked tiles will remain unlocked, even if you don't have this mod).
+
+Obviously, without it you're back to a 441 tile maximum (except for any that you've already unlocked).
 
 ### Translations
 This mod supports localization via a [CrowdIn project](https://crowdin.com/project/592-tiles).  Please help out if you can!

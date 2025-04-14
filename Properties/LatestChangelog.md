@@ -1,1 +1,1 @@
-﻿- Update translations.
+﻿- Add new default option to keep game behavior (no additional unlocks).

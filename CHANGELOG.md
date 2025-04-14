@@ -1,3 +1,6 @@
+### 1.3
+- Add new default option to keep game behavior (no additional unlocks).
+
 ### 1.2.2.3
 - Update translations.
 
