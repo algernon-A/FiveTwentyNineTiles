@@ -18,7 +18,8 @@ namespace FiveTwentyNineTiles
     [FileLocation(Mod.ModName)]
     public class ModSettings : ModSetting
     {
-        private bool _unlockAll = true;
+        private bool _unlockNone = true;
+        private bool _unlockAll = false;
         private bool _extraAtStart = false;
         private bool _extraAtEnd = false;
         private bool _milestones = false;
@@ -32,6 +33,33 @@ namespace FiveTwentyNineTiles
             : base(mod)
         {
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether no additional unlocks should be provided.
+        /// </summary>
+        [SettingsUISection("UnlockMode")]
+        public bool UnlockNone
+        {
+            get => _unlockNone;
+
+            set
+            {
+                _unlockNone = value;
+
+                // Clear conflicting settings.
+                if (value)
+                {
+                    _unlockAll = false;
+                    _extraAtStart = false;
+                    _extraAtEnd = false;
+                    _milestones = false;
+                }
+
+                // Ensure state.
+                EnsureState();
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
@@ -48,6 +76,7 @@ namespace FiveTwentyNineTiles
                 // Clear conflicting settings.
                 if (value)
                 {
+                    _unlockNone = false;
                     _extraAtStart = false;
                     _extraAtEnd = false;
                     _milestones = false;
@@ -73,6 +102,7 @@ namespace FiveTwentyNineTiles
                 // Clear conflicting settings.
                 if (value)
                 {
+                    _unlockNone = false;
                     _unlockAll = false;
                     _extraAtEnd = false;
                     _milestones = false;
@@ -98,6 +128,7 @@ namespace FiveTwentyNineTiles
                 // Clear conflicting settings.
                 if (value)
                 {
+                    _unlockNone = false;
                     _unlockAll = false;
                     _milestones = false;
                     _extraAtStart = false;
@@ -123,6 +154,7 @@ namespace FiveTwentyNineTiles
                 // Clear conflicting settings.
                 if (value)
                 {
+                    _unlockNone = false;
                     _unlockAll = false;
                     _extraAtStart = false;
                     _extraAtEnd = false;
@@ -186,7 +218,8 @@ namespace FiveTwentyNineTiles
         /// </summary>
         public override void SetDefaults()
         {
-            _unlockAll = true;
+            _unlockNone = true;
+            _unlockAll = false;
             _extraAtStart = false;
             _extraAtEnd = false;
             _milestones = false;

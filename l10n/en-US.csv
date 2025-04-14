@@ -1,4 +1,6 @@
 Options.SECTION:[algernon.529Tiles]	529 Tiles
+Options.OPTION:UnlockNone	No extra tiles
+Options.OPTION_DESCRIPTION:UnlockNone	Keep the base game behavior and don't provide any extra tile unlocks.
 Options.OPTION:UnlockAll	Unlock all tiles
 Options.OPTION_DESCRIPTION:UnlockAll	Automatically and immediately unlocks all tiles on the map when you start a new city (or load an existing one).
 Options.OPTION:ExtraTilesAtStart	Provide extra tiles at start
