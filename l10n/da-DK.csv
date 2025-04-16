@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Lås alle felter op"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Lås automatisk alle felter på kortet op med det samme, når du starter en ny by (eller indlæser en eksisterende)."
 "Options.OPTION:ExtraTilesAtStart"	"Få flere felter ved start"

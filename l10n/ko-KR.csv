@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 타일 (529 Tiles)"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"모든 타일 잠금해제"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"새로운 도시를 시작 할 때(또는 기존 도시를 로드할 때) 지도의 모든 타일을 자동으로 즉시 해제합니다."
 "Options.OPTION:ExtraTilesAtStart"	"시작 시 추가 타일 제공"

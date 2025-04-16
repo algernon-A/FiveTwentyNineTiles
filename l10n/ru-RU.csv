@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Клеток"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Разблокировать все клетки"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Автоматически и немедленно разблокирует все клетки на карте, когда вы начинаете новый город (или загружаете существующий)."
 "Options.OPTION:ExtraTilesAtStart"	"Предоставить дополнительные клетки в начале"

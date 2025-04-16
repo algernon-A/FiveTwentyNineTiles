@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"當開始新遊戲（或載入一個現有存檔）時，自動解鎖地圖上所有地塊。"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"當開始新遊戲（或載入一個現有存檔）時，自動解鎖地圖上所有地塊。"
 "Options.OPTION:ExtraTilesAtStart"	"增加開始新遊戲時可使用的地塊"

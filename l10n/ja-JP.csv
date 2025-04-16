@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"すべてのタイルをアンロックする"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"新しい都市を始めたとき(または既存の都市をロードしたとき)、マップ上のすべてのタイルを自動かつ即座にアンロックします。"
 "Options.OPTION:ExtraTilesAtStart"	"開始時に追加のタイルを割り当てる"

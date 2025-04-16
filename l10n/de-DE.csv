@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Alle Bereiche freischalten"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Alle Spielbereiche auf der Karte werden automatisch und sofort entsperrt, wenn man eine neue Stadt startet (oder eine bestehende neu lädt)."
 "Options.OPTION:ExtraTilesAtStart"	"Zusätzliche Spielbereiche beim Spielstart bereitstellen"

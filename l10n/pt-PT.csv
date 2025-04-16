@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"Sem áreas adicionais"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Mantém o comportamento padrão do jogo base e não desbloqueia áreas extra."
 "Options.OPTION:UnlockAll"	"Desbloquear todas as áreas"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Desbloqueia automaticamente e imediatamente todas as áreas do mapa quando inicias uma nova cidade (ou carregas uma existente)."
 "Options.OPTION:ExtraTilesAtStart"	"Fornecer áreas extra no início"

@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Desbloquear todos os blocos"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Desbloqueia automáticamente e imediatamente todos os blocos do mapa quando você inicia uma nova cidade (ou carrega uma existente)."
 "Options.OPTION:ExtraTilesAtStart"	"Forneça blocos extras no início do jogo"

@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Sectoare"
+"Options.OPTION:UnlockNone"	"Fără sectoare adiționale"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Păstrează comportamentul de bază al jocului și nu oferă deblocări de sectoare adiționale."
 "Options.OPTION:UnlockAll"	"Deblochează toate sectoarele"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Deblochează automat și imediat toate sectoarele de pe hartă atunci când începeți un oraș nou (sau încărcați unul existent)."
 "Options.OPTION:ExtraTilesAtStart"	"Oferă sectoare suplimentare la început"

@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"Pas de tuiles supplémentaires"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Garder le comportement de base du jeu et ne pas débloquer de tuile supplémentaire."
 "Options.OPTION:UnlockAll"	"Déverrouiller toutes les tuiles"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Déverrouille automatiquement et immédiatement toutes les tuiles de la carte lorsque vous démarrez une nouvelle ville (ou chargez une existante)."
 "Options.OPTION:ExtraTilesAtStart"	"Fournir des tuiles supplémentaires au départ"

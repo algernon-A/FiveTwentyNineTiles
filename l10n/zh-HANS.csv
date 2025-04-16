@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"没有额外的地块"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"保留游戏的原版体验，不提供解锁任何额外的地块。"
 "Options.OPTION:UnlockAll"	"解锁全部地块"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"当您开始一个新的存档（或加载一个现有存档）时，将自动解锁地图上的所有地块。"
 "Options.OPTION:ExtraTilesAtStart"	"在新建地图时提供额外的地块"

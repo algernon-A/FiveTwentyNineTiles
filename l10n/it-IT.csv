@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tessere"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Sblocca tutte le Tessere"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Sblocca automaticamente e immediatamente tutte le Tessere sulla mappa quando si avvia una nuova città (o si carica una esistente)."
 "Options.OPTION:ExtraTilesAtStart"	"Fornisce Tessere extra all'inizio"

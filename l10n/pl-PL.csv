@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"Bez dodatkowych pól"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Zachowaj domyślne działanie gry i nie dodawaj dodatkowych pól mapy do odblokowania."
 "Options.OPTION:UnlockAll"	"Odblokuj całą mapę"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Automatycznie i natychmiastowo odblokowuje wszystkie pola na mapie po uruchomieniu nowego miasta (lub załadowaniu istniejącego)."
 "Options.OPTION:ExtraTilesAtStart"	"Dodaj dodatkowe pola przy starcie"

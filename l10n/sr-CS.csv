@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 polja"
+"Options.OPTION:UnlockNone"	"No extra tiles"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Keep the base game behavior and don't provide any extra tile unlocks."
 "Options.OPTION:UnlockAll"	"Otključaj sva polja"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Automatski i odmah otključaj sva polja na mapi kada započneš novi grad (ili učitaš postojeći)."
 "Options.OPTION:ExtraTilesAtStart"	"Obezbedi dodatna polja na početku"

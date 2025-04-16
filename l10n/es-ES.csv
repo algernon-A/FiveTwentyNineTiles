@@ -1,4 +1,6 @@
 "Options.SECTION:[algernon.529Tiles]"	"529 Tiles"
+"Options.OPTION:UnlockNone"	"Sin casillas adicionales"
+"Options.OPTION_DESCRIPTION:UnlockNone"	"Mantiene el comportamiento del juego base y no proporciona desbloqueos de casillas adicionales."
 "Options.OPTION:UnlockAll"	"Desbloquear todas las casillas"
 "Options.OPTION_DESCRIPTION:UnlockAll"	"Desbloquear automática e inmediatamente todas las casillas en el mapa al empezar una nueva ciudad (o al cargar alguna existente)."
 "Options.OPTION:ExtraTilesAtStart"	"Provee casillas adicionales al iniciar"
