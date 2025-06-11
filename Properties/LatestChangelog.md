@@ -1,1 +1,1 @@
-﻿- Add new default option to keep game behavior (no additional unlocks).
+﻿- Rebuild for game version 1.3.3.
