@@ -61,7 +61,7 @@ Modders (and aspiring modders!), as always I'm available and happy to chat about
   <ModVersion Value="1.3.1" />
   <GameVersion Value="1.3.*" />
   <Dependency Id="" DisplayName="" Version="" />
-  <ChangeLog>- Rebuild for game version 1.3.3.</ChangeLog>
+  <ChangeLog>- Update options panel checkbox handling.</ChangeLog>
   <ExternalLink Type="github" Url="https://github.com/algernon-A/FiveTwentyNineTiles" />
   <ExternalLink Type="discord" Url="https://discord.gg/HTav7ARPs2" />
   <ExternalLink Type="crowdin" Url="https://crowdin.com/project/592-tiles" />

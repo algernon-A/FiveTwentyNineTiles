@@ -62,7 +62,6 @@ namespace FiveTwentyNineTiles
             }
         }
 
-
         /// <summary>
         /// Gets or sets a value indicating whether the entire map should be unlocked on load.
         /// </summary>
