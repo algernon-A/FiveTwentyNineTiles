@@ -1,3 +1,5 @@
+- Update options panel checkbox handling.
+
 ### 1.3.1
 - Rebuild for game version 1.3.3.
 

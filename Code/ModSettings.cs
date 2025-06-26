@@ -54,9 +54,11 @@ namespace FiveTwentyNineTiles
                     _extraAtEnd = false;
                     _milestones = false;
                 }
-
-                // Ensure state.
-                EnsureState();
+                else
+                {
+                    // Ensure correct state (default option selected if all others are disabled).
+                    EnsureState();
+                }
             }
         }
 
@@ -81,9 +83,11 @@ namespace FiveTwentyNineTiles
                     _extraAtEnd = false;
                     _milestones = false;
                 }
-
-                // Ensure state.
-                EnsureState();
+                else
+                {
+                    // Ensure correct state (default option selected if all others are disabled).
+                    EnsureState();
+                }
             }
         }
 
@@ -107,9 +111,11 @@ namespace FiveTwentyNineTiles
                     _extraAtEnd = false;
                     _milestones = false;
                 }
-
-                // Ensure state.
-                EnsureState();
+                else
+                {
+                    // Ensure correct state (default option selected if all others are disabled).
+                    EnsureState();
+                }
             }
         }
 
@@ -133,9 +139,11 @@ namespace FiveTwentyNineTiles
                     _milestones = false;
                     _extraAtStart = false;
                 }
-
-                // Ensure state.
-                EnsureState();
+                else
+                {
+                    // Ensure correct state (default option selected if all others are disabled).
+                    EnsureState();
+                }
             }
         }
 
@@ -159,9 +167,11 @@ namespace FiveTwentyNineTiles
                     _extraAtStart = false;
                     _extraAtEnd = false;
                 }
-
-                // Ensure state.
-                EnsureState();
+                else
+                {
+                    // Ensure correct state (default option selected if all others are disabled).
+                    EnsureState();
+                }
             }
         }
 
@@ -236,13 +246,13 @@ namespace FiveTwentyNineTiles
         public bool StartingTilesHidden() => UnlockAll;
 
         /// <summary>
-        /// Enables Unlock All as the default option and that no options are duplicated.
+        /// Enables Unlock None as the default option if no other unlock options are selected.
         /// </summary>
         private void EnsureState()
         {
             if (!_unlockAll && !_extraAtStart && !_extraAtEnd && !_milestones)
             {
-                UnlockAll = true;
+                UnlockNone = true;
             }
         }
     }
