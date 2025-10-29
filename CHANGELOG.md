@@ -1,3 +1,5 @@
+### 1.3.2
+- Compatibility with game version 1.3.6.
 - Update options panel checkbox handling.
 
 ### 1.3.1
